@@ -22,7 +22,7 @@ def generate_requirements():
         "aiofiles",
         "alembic",
         "python-multipart",
-        "pydantic"
+        "pydantic",
         "httpx",
     ]
 
@@ -32,11 +32,12 @@ def generate_requirements():
         for package in required_packages:
             if any(p.startswith(package) for p in installed_packages):
                 matching_pkg = next(p for p in installed_packages if p.startswith(package))
+                print(f"Using installed package: {matching_pkg}")
                 f.write(f"{matching_pkg}\n")
             else:
+                print(f"Adding new package: {package}")
                 f.write(f"{package}\n")
 
 if __name__ == "__main__":
     generate_requirements()
     print("requirements.txt has been generated.")
-    # subprocess.run(["pip", "install", "-r", "requirements.txt"])
