@@ -29,3 +29,7 @@ async def root(request: Request):
         ]
     }
     return templates.TemplateResponse("index.html", ex)
+
+@app.get("/health")
+def health_check():
+    return {"status": "healthy"}
