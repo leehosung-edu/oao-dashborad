@@ -1,5 +1,5 @@
 # 파이썬 이미지 빌드 Dockerfile 
-ARG PYTHON_VERSION
+ARG PYTHON_VERSION=3.13.2
 FROM python:${PYTHON_VERSION}-slim AS builder
 
 # 작업 디렉토리 및 환경 변수 설정
