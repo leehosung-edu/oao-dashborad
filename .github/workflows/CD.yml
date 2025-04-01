@@ -24,7 +24,7 @@ jobs:
 
       # 파이썬 버전 가져오기
       - name: Get Python Version
-        id: get_python_version
+        id: get_version
         run: |
           python_version=$(python scripts/get_python_version.py | jq -r .full)
           echo "version=${python_version}" >> $GITHUB_OUTPUT
