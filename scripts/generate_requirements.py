@@ -15,7 +15,7 @@ def generate_requirements():
     # FastAPI 및 관련 패키지 목록
     required_packages = [
         "fastapi[all]",
-        "uvicorn",
+        "uvicorn[standard]",
         "sqlalchemy",
         "python-dotenv",
         "jinja2",
