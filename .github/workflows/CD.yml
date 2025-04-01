@@ -62,7 +62,9 @@ jobs:
 
       # 기존 컨테이너 중지
       - name: Stop Docker contatiner
-        run: docker stop oao_cicd_action || true
+        run: |
+          docker stop oao_cicd_action || true
+          docker rm oao_cicd_action || true
 
       # 최신 이미지 컨테이너화 후 실행
       - name: Run new contatiner
