@@ -7,8 +7,7 @@ WORKDIR /app
 ENV PYTHONPATH=/app
 
 # 가상환경 생성
-ENV VENV_PATH=/opt/venv
-RUN python -m venv $VENV_PATH
+RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
 # 의존성 설치 (캐싱)
@@ -22,8 +21,8 @@ WORKDIR /app
 ENV PYTHONPATH=/app
 
 # 가상환경 복사 및 경로 설정
-COPY --from=builder /opt/venv $VENV_PATH
-ENV PATH="$VENV_PATH/bin:$PATH"
+COPY --from=builder /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 
 # 소스코드 복사
 COPY ./app /app/app
