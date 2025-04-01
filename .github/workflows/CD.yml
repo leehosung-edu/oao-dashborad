@@ -4,7 +4,7 @@ name: wien0128 CD
 
 on:
   workflow_run:
-    workflows: ["wien0128 CD"]
+    workflows: ["wien0128 CI"]
     types:
       - completed
     branches: [main]

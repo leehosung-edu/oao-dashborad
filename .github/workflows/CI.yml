@@ -32,8 +32,8 @@ jobs:
         run: python scripts/generate_requirements.py
 
       # requirements.txt 캐싱
-      - name: Cache requirments.txt
+      - name: Cache Requirements
         uses: actions/cache@v3
         with:
-          path: requirments.txt
+          path: requirements.txt
           key: ${{ runner.os }}-requirements-${{ hashFiles('**/requirements.txt') }}
