@@ -22,6 +22,13 @@ jobs:
       # 레포지토리 코드 체크아웃 v4
       - uses: actions/checkout@v4
 
+      # 파이썬 버전 가져오기
+      - name: Get Python Version
+        id: get_python_version
+        run: |
+          python_version=$(python scripts/get_python_version.py | jq -r .full)
+          echo "version=${python_version}" >> $GITHUB_OUTPUT
+
       # 의존성 설치
       - name: Install Dependencies
         run: |
