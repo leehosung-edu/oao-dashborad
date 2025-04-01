@@ -17,7 +17,6 @@ def generate_requirements():
         "fastapi[all]",
         "uvicorn",
         "sqlalchemy",
-        "uvicorn[standard]",
         "python-dotenv",
         "jinja2",
         "aiofiles",
