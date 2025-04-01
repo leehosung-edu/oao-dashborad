@@ -32,4 +32,7 @@ COPY ./app /app/app
 COPY ./scripts/start.sh /app/start.sh
 RUN chmod +x /app/start.sh
 
+# [DEBUG] uvicorn 설치 경로 확인
+RUN which uvicorn
+
 CMD [ "/app/start.sh" ]
