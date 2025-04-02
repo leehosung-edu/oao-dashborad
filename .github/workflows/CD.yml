@@ -68,7 +68,11 @@ jobs:
 
       # 최신 이미지 컨테이너화 후 실행
       - name: Run new contatiner
-        run: docker run -d --name oao_cicd_action -p 8000:8000 ${{ secrets.DOCKERHUB_USERNAME }}/oao_cicd_action
+        run: docker run -d \
+          --name oao_cicd_action \
+          -p 8000:8000 \
+          -v /path/to/ec2/data:/app/data \
+          ${{ secrets.DOCKERHUB_USERNAME }}/oao_cicd_action
 
       # 미사용 이미지 정리
       - name: Remove old contatiner
