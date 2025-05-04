@@ -5,25 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FastAPI Test</title>
     <link rel="stylesheet" href="{{ url_for('static', path='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/Rec_Comm_Upper.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/Button.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/work_font.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/ko_and_en_font.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/icon.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/Comm.css') }}">
+    
 </head>
 <body>
-    <header>
-        <h1>{{ message }}</h1>
-    </header>
+    <div id="main">
+        <div id="main_Rec"></div>
+            <div id="picture"></div>
+            <div id="text1">국회 위원회 한 눈에 보기</div>
+            <div id="text2">위원회 소개와 일정까지 한 번에 확인해보세요</div>
 
-    <main>
-        <h2>아이템 목록</h2>
-        <ul>
-            {% for item in items %}
-            <li>{{ item.name }} - {{ item.price }}원</li>
-            {% endfor %}
-        </ul>
-    </main>
+            <div id="Rec_Comm"></div>
+            <div id="Rec_Comm_Upper"></div>
+            <div id="Comm"></div>
 
-    <footer>
-        <p>&copy; FastAPI Test</p>
-    </footer>
-
+            <div id="overlay" onclick="closePopup()"></div>
+            <div id="popup">
+                <div id="contact_info">연락처</div>
+                <div id="email">이메일</div>
+                <div id="email_addres">test</div>
+                <div id="phone">전화번호</div>
+                <div id="phone_number">123</div>
+                <div id="close" onclick="closePopup()"></div>
+            
     <script src="{{ url_for('static', path='js/index.js') }}"></script>
 </body>
 </html>

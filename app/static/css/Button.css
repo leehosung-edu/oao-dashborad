@@ -1,0 +1,191 @@
+#button_blue_1{
+    position: absolute;   /*버튼 위치를 반복문으로 조절하고 싶음 */
+    top: 964px;
+    left: 230px;
+}
+#button_blue_2{
+    position: absolute;
+    top: 964px;
+    left: 377px;
+}
+
+#button_purple_1{
+position: absolute;
+top: 964px;
+left: 783px;
+}
+#button_purple_2{
+position: absolute;
+top: 964px;
+left: 928px;
+}
+
+#button_Heavygreen_1{
+    position: absolute;
+top: 1319px;
+left: 230px;
+}
+#button_Heavygreen_2{
+    position: absolute;
+top: 1319px;
+left: 377px;
+}
+
+#button_Orange_1{
+    position: absolute;
+top: 1319px;
+left: 783px;
+}
+#button_Orange_2{
+    position: absolute;
+top: 1319px;
+left: 928px;
+}
+
+#button_Blue_edu_1{
+position: absolute;
+top: 1674px;
+left: 230px;
+}
+#button_Blue_edu_2{
+    position: absolute;
+    top: 1674px;
+    left: 377px;  
+}
+
+#button_Lightgreen_1{
+position: absolute;
+top: 1674px;
+left: 783px;
+}
+#button_Lightgreen_2{
+    position: absolute;
+    top: 1674px;
+    left: 928px;
+}
+
+#button_Lightblue_1{
+    position: absolute;
+top: 2029px;
+left: 230px;
+}
+#button_Lightblue_2{
+position: absolute;
+top: 2029px;
+left: 377px;
+}
+
+#button_Red_1{
+position: absolute;
+top: 2029px;
+left: 783px;
+}
+#button_Red_2{
+position: absolute;
+top: 2029px;
+left: 928px;
+}
+
+#button_Mint_1{
+position: absolute;
+top: 2384px;
+left: 230px;
+}
+#button_Mint_2{
+position: absolute;
+top: 2384px;
+left: 377px;
+}
+
+#button_Heavyorange_1{
+position: absolute;
+top: 2384px;
+left: 783px;
+}
+#button_Heavyorange_2{
+    position: absolute;
+    top: 2384px;
+    left: 928px;  
+}
+
+#button_Green_1{
+    top: 2739px;
+    left: 230px;
+}
+#button_Green_2{
+    top: 2739px;
+    left: 377px;
+}
+
+#button_Vermilion_1{
+    top: 2739px;
+    left: 783px;
+    
+}
+#button_Vermilion_2{
+    top: 2739px;
+    left: 927px;
+}
+
+#button_Pink_1{
+    top: 3094px;
+    left: 230px;
+    
+}
+#button_Pink_2{
+    top: 3094px;
+    left: 377px;
+    
+}
+
+#button_Green_env_1{
+    top: 3094px;
+    left: 783px;
+    
+}
+#button_Green_env_2{
+    top: 3094px;
+    left: 928px;
+    
+}
+
+#button_Yellow_env_1{
+    top: 3449px;
+    left: 230px;
+  
+}
+#button_Yellow_env_2{
+    top: 3448px;
+    left: 377px;
+    
+}
+
+#button_Gray_env_1{
+    top: 3449px;
+    left: 783px;
+    
+}
+#button_Gray_env_2{
+    top: 3449px;
+    left: 927px;
+    
+}
+
+#button_Lightpurple_env_1{
+    top: 3804px;
+    left: 230px;
+}
+#button_Lightpurple_env_2{
+    top: 3804px;
+    left: 376px; 
+}
+
+#button_Black_env_1{
+    top: 3804px;
+    left: 783px;
+    
+}
+#button_Black_env_2{
+    top: 3804px;
+    left: 928px;
+}
