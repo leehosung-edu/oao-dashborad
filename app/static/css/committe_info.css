@@ -1,0 +1,73 @@
+#main_committe_info{
+    width: 1105px;
+height: 1400px;
+background: #F8F9FA;
+position: relative;
+left: 0px;
+}
+#namespace{
+    position: absolute;
+    width: 1105px;
+height: 300px;
+background: rgba(0, 0, 0, 0.40);
+}
+#party_info{
+    width: 1057px;
+height: 348px;
+border-radius: 12px;
+background: #FFF;
+box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.10), 0px 0px 0px 0px rgba(0, 0, 0, 0.00), 0px 0px 0px 0px rgba(0, 0, 0, 0.00), 0px 0px 0px 0px rgba(0, 0, 0, 0.00), 0px 0px 0px 0px rgba(0, 0, 0, 0.00);
+position: absolute; 
+top: 300px;
+left: 24px;
+border-radius: 12px;
+}
+.table_line{
+    width: 677px;
+    height: 57px;
+    border-bottom: 1px solid #E9ECEF;
+    position: absolute;
+}
+#table_line1{
+top: 349px;
+left: 48px;
+}
+#table_line2{
+    top: 406px;
+left: 48px;
+}
+#table_line3{
+    top: 463px;
+    left: 48px;
+}
+.table_font{
+    font-family: Inter;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+letter-spacing: 0%;
+position: absolute;
+}
+#party_type{
+    top: 365px;
+    left: 64px;
+}
+#party_name1{
+
+}
+#party_name2{
+    
+}
+#party_name3{
+
+}
+
+#seats_number{
+    top: 365px;
+    left: 365px;
+}
+
+#ratio{
+    top: 365px;
+    left: 555px;
+}
