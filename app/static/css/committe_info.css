@@ -4,12 +4,7 @@ height: 1400px;
 background: #F8F9FA;
 position: relative;
 left: 0px;
-}
-#namespace{
-    position: absolute;
-    width: 1105px;
-height: 300px;
-background: rgba(0, 0, 0, 0.40);
+display: flex;
 }
 #party_info{
     width: 1057px;
@@ -52,16 +47,6 @@ position: absolute;
     top: 365px;
     left: 64px;
 }
-#party_name1{
-
-}
-#party_name2{
-    
-}
-#party_name3{
-
-}
-
 #seats_number{
     top: 365px;
     left: 365px;
@@ -71,3 +56,37 @@ position: absolute;
     top: 365px;
     left: 555px;
 }
+#chart_frame{
+    width: 226.014px;
+height: 236px;
+    position: relative;
+    box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.08);
+    border-radius: 50%;
+    background-color: #fff;
+    height: 236px;
+position: relative;
+}
+#chart{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 204.437px;
+    height: 213.47px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background:conic-gradient(blue 0% 50%, red 50% 70%, yellow 70% 100%);
+
+}
+.center{
+    background: #FFF;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    transform:translate(-50%,-50%);
+    border-radius: 50%;
+}
+

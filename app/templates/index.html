@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="{{ url_for('static', path='css/ko_and_en_font.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/icon.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/Comm.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='css/committe_info.css') }}">
 </head>
 <body>
     <div id="main">
@@ -52,7 +53,10 @@
                 <div id="phone">전화번호</div>
                 <div id="phone_number">123</div>
                 <div id="close" onclick="closePopup()"></div>
-            
-    <script src="{{ url_for('static', path='js/index.js') }}"></script>
+    
+    <script src="{{ url_for('static', path='js/htmlfetch.js') }}"></script><!--이게 index.html 줄여주는 거라 먼저 되야 함, 안되면 그래프가 안 나옴-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', path='js/index.js') }}" defer></script>
+    
 </body>
 </html>
