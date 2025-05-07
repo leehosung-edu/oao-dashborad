@@ -6,7 +6,6 @@
     <title>OaO</title>
     <link rel="stylesheet" href="{{ url_for('static', path='css/index.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/Rec_Comm_Upper.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='css/Button.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/work_font.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/ko_and_en_font.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='css/icon.css') }}">
@@ -35,20 +34,16 @@
 </head>
 <body>
     <main>
-    <div id="main">
-        <div id="main_Rec"></div>
-            <div id="picture"></div>
-            <div id="text1">국회 위원회 한 눈에 보기</div>
-            <div id="text2">위원회 소개와 일정까지 한 번에 확인해보세요</div>
-
-            <div id="Rec_Comm"></div>
-            <div id="Rec_Comm_Upper"></div>
-            <div id="Comm"></div>
-    </div>
-    <style>
-
-    </style>
-</main>
+        <div id="main_Rec">
+            <div class="img_container">
+                <img src="../static/css/icon/Gov_.png" alt="gov image">
+                </div>
+            <div class="text_container">
+                <p id="text1">국회 위원회 한 눈에 보기</p>
+                <p id="text2">위원회 소개와 일정까지 한 번에 확인해보세요</p>
+            </div>
+        </div>
+    </main>
     
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

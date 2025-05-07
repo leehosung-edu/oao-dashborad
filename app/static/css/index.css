@@ -1,76 +1,65 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    background-color: #f4f4f4;
-    padding: 10px;
-}
-
-main {
-    padding: 20px;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    margin: 5px 0;
-}
-#main{
-    width: 1122px;
-height: 4224px;
-background: #FFFFFF;
 display: flex;
-flex-wrap: wrap;
-position: relative;
-transform: translate(50%);
+flex-direction: column;
+align-items: center;
+margin: 0px;
+}
+main {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: center;
 }
 #main_Rec{
-    width: 1122px;
-    height: 4224px;
+    width: 100%;
     flex-shrink: 0;
     background: #FEF2E0;
-    display: flex;
+    display: grid;
+    height: 4224px;
+    /* overflow: hidden; */
 }
-#picture{
-    position: absolute;
-    left: -1px;
-    top: 2px;
-    width: 1120px;
-    height: 795px;  
-    flex-shrink: 0;
-    aspect-ratio: 224/159;
+.img_container{
+    width: 100%;
     border: 1px solid #000;
-    background: url('icon\\Gov_.png') lightgray 2.636px 2.108px / 100.045% 106.276% no-repeat;
+    box-sizing: border-box;
+    grid-area: 1/1/2/2;
+}
+.img_container img{
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.text_container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    grid-area: 1/1/2/2;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 #text1{  
-    position: absolute;
     color: #1C1C1C;
     text-align: center;
     font-family: "Noto Sans KR";
-    font-size: 48px;
+    font-size: 5vw;
     font-style: normal;
     font-weight: 700;
-    line-height: 57.6px; /* 120% */
-    top: 202px;
-    left: 316px;
+    margin-top: 14.5vw;
+    margin-bottom: 0px;
 }
 #text2{
-    position: absolute;
     color: #1C1C1C;
 text-align: center;
 font-family: "Noto Sans KR";
-font-size: 32px;
+font-size: 3vw;
 font-style: normal;
 font-weight: 300;
-line-height: 48px; /* 150% */
-top: 260px;
-left: 261px;
+margin: 0vw;
 }
 .Rec_Comm_Upper{
     all:unset;

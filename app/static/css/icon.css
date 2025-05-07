@@ -2,13 +2,13 @@
     position: absolute;
     top: 748px;
     left: 66px;
-    background: url('icon\\Government Building 2.png')  50% / cover no-repeat;
+    background: url('../css/icon/Government Building 2.png')  50% / cover no-repeat;
     }
     #Justice_scaie{
         position: absolute;
         top: 744px;
         left: 622px;
-        background: url('icon\\Justice Scale 1.png')  50% / cover no-repeat;
+        background: url('icon/Justice Scale 1.png')  50% / cover no-repeat;
     }
     #ruling{
         position: absolute;
