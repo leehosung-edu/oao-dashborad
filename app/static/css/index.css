@@ -28,6 +28,7 @@ background: #FFFFFF;
 display: flex;
 flex-wrap: wrap;
 position: relative;
+transform: translate(50%);
 }
 #main_Rec{
     width: 1122px;
