@@ -33,3 +33,8 @@ async def root(request: Request):
 @app.get("/health")
 def health_check():
     return {"status": "healthy"}
+
+# /committee 라우트 추가
+@app.get("/committee", response_class=HTMLResponse)
+async def committee(request: Request):
+    return templates.TemplateResponse("committee.html", {"request": request})

@@ -1,0 +1,194 @@
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+  }
+  
+  header, footer {
+    background-color: #777778 !important;
+    color: white;
+    text-align: center;
+    padding: 24px;
+  }
+  
+	header {
+    padding: 48px 24px;
+  }
+
+  footer {
+    margin-top: 40px;
+  }
+  
+  #committee-name {
+    text-align: center;
+    margin: 20px;
+    font-size: 1.5em;
+  }
+  
+  #summary-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    max-width: 900px;
+    padding: 24px;
+    margin: 24px auto;
+    gap: 24px;
+  }
+  
+  #party-summary {
+    flex: 1 1 400px;
+    min-width: 300px;
+  }
+  
+  #chart-box {
+    width: 280px;
+    height: 240px;
+    flex-shrink: 0;
+  }
+  
+  #party-chart {
+    width: 100% !important;
+    height: 100% !important;
+    display: block;
+  }
+  
+  #card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .top-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .role {
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 0.95em;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  /* 역할별 색상 */
+  .role-chair {
+    background: #d8ecff;
+    color: black;
+  }
+  
+  .role-secretary {
+    background: #ffe4e1;
+    color: black;
+  }
+  
+  .role-member {
+    background: #eeeeee;
+    color: black;
+  }
+  
+  .party {
+    color: #555;
+    font-size: 0.95em;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+  
+  .name {
+    margin: 0;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #111;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+  }
+  
+  .district {
+    margin: 0;
+    font-size: 1em;
+    color: #666;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+
+  /* 팝업 오버레이 */
+	#popup-overlay {
+  	position: fixed;
+  	top: 0; left: 0;
+ 		width: 100vw;
+  	height: 100vh;
+  	background-color: rgba(0, 0, 0, 0.6);
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	z-index: 999;
+	}
+
+	.popup-box {
+  	background: white;
+  	padding: 32px;
+  	border-radius: 16px;
+  	width: 350px;
+  	height: 200px;
+  	position: relative;
+  	box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+	}
+
+	.popup-box h2 {
+  	color: var(--FlexUI-Gray-950, #19191B);
+  	text-align: center;
+  	align-self: stretch;
+  	/* Title/Title 2 - 24 Px/Bold */
+  	font-family: Inter;
+  	font-size: 24px;
+  	font-style: normal;
+  	font-weight: 700;
+  	line-height: 37px; /* 154.167% */
+	}
+
+	.popup-box button#popup-close {
+  	position: absolute;
+  	top: 12px;
+  	right: 16px;
+  	background: none;
+  	border: none;
+  	font-size: 20px;
+  	cursor: pointer;
+	}
+
+	#popup-overlay.hidden {
+  	display: none;
+	}
+  
+  @media (max-width: 768px) {
+    #summary-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    #chart-box {
+      width: 100%;
+      max-width: 300px;
+      margin-top: 16px;
+    }
+    #card-container {
+      justify-content: center;
+    }
+  }
+  
