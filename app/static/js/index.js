@@ -16,6 +16,6 @@
         function chart_change(color_1st,ratio_1st,color_2nd,ratio_2nd,color_3rd,ratio_3rd,chart){   
             chart.style.background="conic-gradient("+color_1st+" 0%"+ratio_1st+"%, "+color_2nd+" "+ratio_1st+"% "+(ratio_1st+ratio_2nd)+"%, "+color_3rd+" "+(ratio_1st+ratio_2nd)+"% "+(ratio_1st+ratio_2nd+ratio_3rd)+"%)"
         }
-        chart_change("red",30,"blue",30,"green",20,chart);}
+        chart_change("#39CEF3",30,"blue",30,"#72CA3D",20,chart);}
       
   
