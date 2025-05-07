@@ -34,6 +34,7 @@
     
 </head>
 <body>
+    <main>
     <div id="main">
         <div id="main_Rec"></div>
             <div id="picture"></div>
@@ -43,21 +44,14 @@
             <div id="Rec_Comm"></div>
             <div id="Rec_Comm_Upper"></div>
             <div id="Comm"></div>
-
-            <div id="overlay" onclick="closePopup()"></div>
-            <div id="popup">
-                <div id="contact_info">연락처</div>
-                <div id="email">이메일</div>
-                <div id="email_addres">test</div>
-                <div id="phone">전화번호</div>
-                <div id="phone_number">123</div>
-                <div id="close" onclick="closePopup()"></div>
-            </div>
     </div>
+    <style>
+
+    </style>
+</main>
     
-    <script src="{{ url_for('static', path='js/htmlfetch.js') }}"></script><!--이게 index.html 줄여주는 거라 먼저 되야 함, 안되면 그래프가 안 나옴-->
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ url_for('static', path='js/index.js') }}" defer></script>
-    
 </body>
 </html>
