@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>위원회 정보</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/committee.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1 id="committee-title">위원회</h1>
+  </header>
+
+  <div id="committee-name"></div>
+
+  <div id="summary-container">
+    <div id="party-summary"></div>
+    <div id="chart-box">
+      <canvas id="party-chart"></canvas>
+    </div>
+  </div>  
+  
+  <div id="card-container"></div>
+
+    <!-- 팝업 모달 -->
+	<div id="popup-overlay" class="hidden">
+  	<div class="popup-box">
+    	<button id="popup-close">×</button>
+    	<h2>연락처</h2>
+    	<p><strong>이메일</strong><br><span id="popup-email"></span></p>
+    	<p><strong>전화번호</strong><br><span id="popup-phone"></span></p>
+  	</div>
+	</div>
+
+	<footer>
+    &copy; OAO
+  </footer>
+
+  <script src="/static/js/committee.js"></script>
+</body>
+</html>
