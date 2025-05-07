@@ -21,3 +21,139 @@ ul {
 li {
     margin: 5px 0;
 }
+#main{
+    width: 1122px;
+height: 4224px;
+background: #FFFFFF;
+display: flex;
+flex-wrap: wrap;
+position: relative;
+transform: translate(50%);
+}
+#main_Rec{
+    width: 1122px;
+    height: 4224px;
+    flex-shrink: 0;
+    background: #FEF2E0;
+    display: flex;
+}
+#picture{
+    position: absolute;
+    left: -1px;
+    top: 2px;
+    width: 1120px;
+    height: 795px;  
+    flex-shrink: 0;
+    aspect-ratio: 224/159;
+    border: 1px solid #000;
+    background: url('icon\\Gov_.png') lightgray 2.636px 2.108px / 100.045% 106.276% no-repeat;
+}
+#text1{  
+    position: absolute;
+    color: #1C1C1C;
+    text-align: center;
+    font-family: "Noto Sans KR";
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 57.6px; /* 120% */
+    top: 202px;
+    left: 316px;
+}
+#text2{
+    position: absolute;
+    color: #1C1C1C;
+text-align: center;
+font-family: "Noto Sans KR";
+font-size: 32px;
+font-style: normal;
+font-weight: 300;
+line-height: 48px; /* 150% */
+top: 260px;
+left: 261px;
+}
+.Rec_Comm_Upper{
+    all:unset;
+    width: 521px;
+    height: 160px;
+    flex-shrink: 0;
+    border-radius: 16px 16px 0px 0px;
+}
+.Rec_Comm{
+width: 521px;
+height: 320px;
+flex-shrink: 0;
+border-radius: 16px;
+background: #FFF;
+box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.05), 0px 0px 0px 0px rgba(0, 0, 0, 0.00), 0px 0px 0px 0px rgba(0, 0, 0, 0.00), 0px 0px 0px 0px rgba(0, 0, 0, 0.00), 0px 0px 0px 0px rgba(0, 0, 0, 0.00);
+}
+.Assets_icon{
+    width: 95px;
+    height: 95px;
+    z-index: 0;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    filter: grayscale(100%);
+
+}
+.ko_font{
+    all:unset;
+    color: #FFF;
+    font-family: "Noto Sans KR";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+line-height: 25.6px; /* 71.111% */
+}
+.en_font{
+    all:unset;
+        color: #FFF;
+font-family: "Noto Sans KR";
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 25.6px; /* 160% */
+}
+.Work_font{
+    all:unset;
+    color: #666;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25.6px; /* 160% */
+    position: absolute;
+    flex-shrink: 0;
+}
+
+.button{
+    all:unset;
+    width: 126px;
+height: 48px;
+flex-shrink: 0;
+border-radius: 8px;
+border-width: 2px;
+border: 2px solid #E0E0E0;
+background: #EDF0F2;
+
+color: #1C1C1C;
+text-align: center;
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 24px; /*폰트*/
+
+display: inline-block;
+align-items: center;
+text-align: center;
+line-height: 50px;
+justify-content: center;/*텍스트 정렬*/
+
+position: absolute;
+
+/* 버튼처럼 만들기 */
+cursor: pointer;
+
+
+}
