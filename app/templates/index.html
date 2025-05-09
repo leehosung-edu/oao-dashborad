@@ -5,14 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OaO</title>
     <link rel="stylesheet" href="{{ url_for('static', path='css/index.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='css/Rec_Comm_Upper.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='css/Button.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='css/work_font.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='css/ko_and_en_font.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='css/icon.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='css/Comm.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', path='css/committe_info.css') }}">
-    
     <link 
         rel="apple-touch-icon"
         sizes="180x180"
@@ -35,20 +27,180 @@
 </head>
 <body>
     <main>
-    <div id="main">
-        <div id="main_Rec"></div>
-            <div id="picture"></div>
-            <div id="text1">국회 위원회 한 눈에 보기</div>
-            <div id="text2">위원회 소개와 일정까지 한 번에 확인해보세요</div>
-
-            <div id="Rec_Comm"></div>
-            <div id="Rec_Comm_Upper"></div>
-            <div id="Comm"></div>
-    </div>
-    <style>
-
-    </style>
-</main>
+        <div id="main_Rec">
+            <div class="img_container">
+                <img src="../static/images/Gov_.png" alt="gov image">
+                </div>
+            <div class="text_container">
+                <p id="text1">국회 위원회 한 눈에 보기</p>
+                <p id="text2">위원회 소개와 일정까지 한 번에 확인해보세요</p>
+            </div>
+            <div class="committe_container">
+                <div id="HSC" class="committe_baseset">
+                    <p id="head_HSC" class="committe_head_baseset" data-color="#1F618D"></p>
+                    <img src="../static/images/Government Building 2.png">
+                    <p class="committe_name_ko">국회운영위원회</p>
+                    <p class="committe_name_en">House Steering Committee</p>
+                    <p class="committe_work">국회 운영 전반과 사무처, 정당 활동을 총괄합니다.</p>
+                    <span class="button_info" data-committe_name=""><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+                </div>
+                <div id="LJC" class="committe_baseset">
+                    <p id="head_LJC" class="committe_head_baseset" data-color="#7D3C98"></p>
+                    <img src="../static/images/Justice Scale 1.png">
+                    <p class="committe_name_ko">법제사법위원회</p>
+                    <p class="committe_name_en">Legislation and Judiciary Committee</p>
+                <p class="committe_work">법률안 심사와 사법 제도, 법무, 검찰을 담당합니다.</p>
+                    <span class="button_info"><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+            </div>
+                <div id="NPC" class="committe_baseset">
+                    <p id="head_NPC" class="committe_head_baseset" data-color="#117864"></p>
+                    <img src="../static/images/ruling 1.png">
+                    <p class="committe_name_ko">정무위원회</p>
+                    <p class="committe_name_en">National Policy Committee</p>
+                <p class="committe_work">금융, 공정거래, 국무조정 등 정무 전반을 심의합니다.</p>
+                    <span class="button_info"><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+            </div>
+                <div id="SFC" class="committe_baseset">
+                    <p id="head_SFC" class=" committe_head_baseset" data-color="#F39C12"></p>
+                    <img src="../static/images/financial-profit 1.png">
+                    <p class="committe_name_ko">기획재정위원회</p>
+                    <p class="committe_name_en">Strategy and Finance Committee</p>
+                <p class="committe_work">예산, 세제, 재정, 경제 정책을 심의 조정합니다.</p>
+                    <span class="button_info"><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+            </div>
+                <div id="EC" class="committe_baseset">
+                    <p id="head_EC" class="committe_head_baseset" data-color="#2980B9"></p>
+                    <img src="../static/images/open.png">
+                    <p class="committe_name_ko">교육위원회</p>
+                    <p class="committe_name_en">Education Committee</p>
+                <p class="committe_work">교육 전반과 교원 정책을 담당합니다.</p>
+                    <span class="button_info"><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+            </div>
+                <div id="SIBCC" class="committe_baseset">
+                    <p id="head_SIBCC" class="committe_head_baseset" data-color="#2ECC71"></p>
+                    <img src="../static/images/antenna.png">
+                    <p class="committe_name_ko" id="SIBCC_name_ko">과학기술정보<br>방송통신위원회</p>
+                    <p class="committe_name_en" id="SIBCC_name_en">Science, ICT, Broadcasting, and Communications<br>Committee</p>
+                    <p class="committe_work" id="SIBCC_work">과학기술, ICT, 방송통신 정책을 다룹니다.</p>
+                    <span class="button_info"><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+                </div>
+                <div id="FAUC" class="committe_baseset">
+                    <p id="head_FAUC" class="committe_head_baseset" data-color="#5DADE2"></p>
+                    <img src="../static/images/earth.png">
+                    <p class="committe_name_ko">외교통일위원회</p>
+                    <p class="committe_name_en">Foreign Affairs and Unification Committee</p>
+                    <p class="committe_work">외교, 통일, 남북관계, 재외동포 정책을 담당합니다.</p>    
+                    <span class="button_info"><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+                </div>
+                <div id="NDC" class="committe_baseset">
+                    <p id="head_NDC" class="committe_head_baseset" data-color="#C0392B"></p>
+                    <img src="../static/images/soldier.png">
+                    <p class="committe_name_ko">국방위원회</p>
+                    <p class="committe_name_en">National Defense Committee</p>
+                <p class="committe_work">국방 정책과 군사 사안을 심의 감독합니다.</p>
+                    <span class="button_info"><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+            </div>
+                <div id="PASC" class="committe_baseset">
+                    <p id="head_PASC" class="committe_head_baseset" data-color="#1ABC9C"></p>
+                    <img src="../static/images/guard.png ">
+                    <p class="committe_name_ko">행정안전위원회</p>
+                    <p class="committe_name_en">Public Administration and Security Committee</p>
+                <p class="committe_work">행정, 자치, 선거, 재난안전 등을 담당합니다.</p>
+                    <span class="button_info"><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+            </div>
+                <div id="CSTC" class="committe_baseset">
+                    <p id="head_CSTC" class="committe_head_baseset" data-color="#E67E22"></p>
+                    <img src="../static/images/palat.png">
+                    <p class="committe_name_ko">문화체육관광위원회</p>
+                    <p class="committe_name_en">Culture, Sports, and Tourism Committee</p>
+                <p class="committe_work">문화, 예술, 체육, 관광 정책을 다룹니다.</p>
+                    <span class="button_info"><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+            </div>
+                <div id="AFROFC" class="committe_baseset">
+                    <p id="head_AFROFC" class="committe_head_baseset" data-color="#229954"></p>
+                    <img src="../static/images/vagetable.png">
+                    <p class="committe_name_ko" id="AFROFC_name_ko">농림축산식품<br>해양수산위원회</p>
+                <p class="committe_name_en" id="AFROFC_name_en">Agriculture, Food, Rural Affairs, Oceans, and <br>Fisheries Committee</p>
+            <p class="committe_work" id="AFROFC_work">농업, 수산업, 식품 산업 전반을 심의합니다.</p>    
+                    <span class="button_info"><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+        </div>
+                <div id="TIESSC" class="committe_baseset">
+                    <p id="head_TIESSC" class="committe_head_baseset" data-color="#D35400"></p>
+                    <img src="../static/images/building.png">
+                    <p class="committe_name_ko" id="TIESSC_name_ko">산업통상자원<br>중소벤처기업위원회</p>
+                    <p class="committe_name_en" id="TIESSC_name_en">Trade, Industry, Energy, SMEs, and Startups<br> Committee</p>
+                <p class="committe_work" id="TIESSC_work">산업, 에너지, 중소기업, 무역 정책을 다룹니다.</p>
+                    <span class="button_info"><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+            </div>
+                <div id="HWC" class="committe_baseset">
+                    <p id="head_HWC" class="committe_head_baseset" data-color="#E74C3C"></p>
+                    <img src="../static/images/aidkit.png">
+                    <p class="committe_name_ko">보건복지위원회</p>
+                    <p class="committe_name_en">Health and Welfare Committee</p>
+                <p class="committe_work">보건의료, 복지, 인구 정책을 총괄합니다.</p>
+                    <span class="button_info"><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+            </div>
+                <div id="ELC" class="committe_baseset">
+                    <p id="head_ELC" class="committe_head_baseset" data-color="#27AE60"></p>
+                    <img src="../static/images/earth_handling.png">
+                    <p class="committe_name_ko">환경노동위원회</p>
+                    <p class="committe_name_en">Environment and Labor Committee</p>
+                <p class="committe_work">환경 보호와 노동 정책 전반을 담당합니다.</p>
+                    <span class="button_info"><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+            </div>
+                <div id="LITC" class="committe_baseset">
+                    <p id="head_LITC" class="committe_head_baseset" data-color="#F1C40F"></p>
+                     <img src="../static/images/road.png">
+                     <p class="committe_name_ko">국토교통위원회</p>
+                    <p class="committe_name_en">Land Infrastructure and Transport Committee</p>
+                <p class="committe_work">국토 개발, 주택, 교통 물류 정책을 심의합니다.</p>    
+                    <span class="button_info"><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+            </div>
+                <div id="IC" class="committe_baseset">
+                    <p id="head_IC" class="committe_head_baseset" data-color="#7F8C8D"></p>
+                   <img src="../static/images/man.png">
+                   <p class="committe_name_ko">정보위원회</p>
+                   <p class="committe_name_en">Intelligence Committee</p>
+                <p class="committe_work">국정원 등 국가 정보기관을 감독합니다.</p>
+                    <span class="button_info"><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+            </div>
+                <div id="GEFC" class="committe_baseset">
+                    <p id="head_GEFC" class="committe_head_baseset" data-color="#AE7AC5"></p>
+                    <img src="../static/images/family.png">
+                    <p class="committe_name_ko">여성가족위원회</p>
+                    <p class="committe_name_en">Gender Equality and Family Committee</p>
+                <p class="committe_work">여성, 아동, 가족, 청소년 정책을 다룹니다.</p>
+                    <span class="button_info"><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+            </div>
+                <div id="SCBA" class="committe_baseset">
+                    <p id="head_SCBA" class="committe_head_baseset" data-color="#2C3E50"></p>
+                    <img src="../static/images/budget.png">
+                    <p class="committe_name_ko">예산결산특별위원회</p>
+                    <p class="committe_name_en">Special Committee on Budget & Accounts</p>
+                <p class="committe_work">정부의 예산안과 결산을 심사하는 국회의 특별위원회입니다.</p>
+                    <span class="button_info"><p>위원회 소개</p></span>
+                    <span class="button_date"><p>일정 보기</p></span>
+            </div>
+            </div>
+        </div>
+    </main>
     
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
