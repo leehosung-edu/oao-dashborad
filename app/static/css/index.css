@@ -40,7 +40,7 @@ align-items: center;
     width: 100%;
     height: auto;
     display: flex;
-    margin-top: -50%;
+    margin-top: -67%;
     flex-direction: column;
     justify-content: flex-start;
     flex-wrap: nowrap;
@@ -50,7 +50,7 @@ align-items: center;
     color: #1C1C1C;
     text-align: center;
     font-family: "Noto Sans KR";
-    font-size: clamp(15px, 5vw, 50px);
+    font-size: clamp(12px, 7vw, 48px);
     font-style: normal;
     font-weight: 700;
     margin-top: 15%;
@@ -61,14 +61,13 @@ align-items: center;
     color: #1C1C1C;
 text-align: center;
 font-family: "Noto Sans KR";
-font-size: clamp(20px, 3vw, 32px);
+font-size: clamp(9px, 3vw, 32px);
 font-style: normal;
 font-weight: 300;
 margin: 0vw;
 }
 .committe_container{
     display: flex;
-
     align-content: flex-start;
     flex-direction: row;
     flex-wrap: wrap;
@@ -76,25 +75,27 @@ margin: 0vw;
     gap: 20px;
 
     position: relative;
-    margin-top: 17%;
+    margin-top: 34%;
 
 }
 .committe_baseset{
-    border-radius: 16px;
-background: #FFF;
-box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.05), 0px 0px 0px 0px rgba(0, 0, 0, 0.00), 0px 0px 0px 0px rgba(0, 0, 0, 0.00), 0px 0px 0px 0px rgba(0, 0, 0, 0.00), 0px 0px 0px 0px rgba(0, 0, 0, 0.00);
-width: 521px;
-height: 320px;
-flex-shrink: 0;
-display: flex;
-flex-direction: column;
-    align-items: center;
+ border-radius: 16px;
+    background: #FFF;
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.05), 0px 0px 0px 0px rgba(0, 0, 0, 0.00), 0px 0px 0px 0px rgba(0, 0, 0, 0.00), 0px 0px 0px 0px rgba(0, 0, 0, 0.00), 0px 0px 0px 0px rgba(0, 0, 0, 0.00);
+    width: 521px;
+    height: 320px;
+    flex-shrink: 0;
+    display: flex;
+    aspect-ratio: 521 / 320;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 .committe_baseset img{
     width: 20%;
     height: auto;
     margin-top: -26%;
-    margin-left: -67%;
+    margin-left: 7%;
     aspect-ratio: 1/1;;
     filter: grayscale(100%);
 }
@@ -162,74 +163,102 @@ background: #117864;
     background: #2C3E50;
 }
 
-
-.Assets_icon{
-    width: 95px;
-    height: 95px;
-    z-index: 0;
-    flex-shrink: 0;
-    aspect-ratio: 1/1;
-    filter: grayscale(100%);
-
-}
-.ko_font{
-    all:unset;
-    color: #FFF;
-    font-family: "Noto Sans KR";
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 400;
+.committe_name_ko{
+color: #FFF;
+font-family: "Noto Sans KR";
+font-size: 36px;
+font-style: normal;
+font-weight: 400;
 line-height: 25.6px; /* 71.111% */
+margin-top: -17%;
+margin-left: 32%;
+margin-bottom: 0;
+z-index: 1;
 }
-.en_font{
-    all:unset;
-        color: #FFF;
+#SIBCC_name_ko{
+width: auto;
+line-height: 40px; 
+margin-top: -20%;
+}
+#AFROFC_name_ko{
+    width: auto;
+line-height: 40px; /* 111.111% */
+ margin-top: -20%;
+}
+#TIESSC_name_ko{
+    width: auto;
+    line-height: 40px;
+    margin-top: -20%;
+
+}
+.committe_name_en{
+    color: #FFF;
 font-family: "Noto Sans KR";
 font-size: 16px;
 font-style: normal;
 font-weight: 400;
 line-height: 25.6px; /* 160% */
+transform-origin: left center;
+margin: 0;
+margin-left: 32%;
+margin-top: 2%;
 }
-.Work_font{
-    all:unset;
+#SIBCC_name_en{
+    margin-top: 0%;
+}
+#AFROFC_name_en{
+     margin-top: 0%;
+}
+#TIESSC_name_en{
+     margin-top: 0%;
+}
+.committe_work{
     color: #666;
-    font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 25.6px; /* 160% */
-    position: absolute;
-    flex-shrink: 0;
-}
-
-.button{
-    all:unset;
-    width: 126px;
-height: 48px;
-flex-shrink: 0;
-border-radius: 8px;
-border-width: 2px;
-border: 2px solid #E0E0E0;
-background: #EDF0F2;
-
-color: #1C1C1C;
-text-align: center;
 font-family: Inter;
 font-size: 16px;
 font-style: normal;
 font-weight: 400;
-line-height: 24px; /*폰트*/
-
-display: inline-block;
-align-items: center;
-text-align: center;
-line-height: 50px;
-justify-content: center;/*텍스트 정렬*/
-
-position: absolute;
-
-/* 버튼처럼 만들기 */
-cursor: pointer;
-
-
+line-height: 25.6px; /* 160% */
+margin-top: 21%;
+margin-left: 7%;
 }
+#SIBCC_work{
+    margin-top: 6%;
+}
+#AFROFC_work{
+     margin-top: 8%;
+     margin-bottom: 6%;
+}
+#TIESSC_work{
+     margin-top: 8%;
+          margin-bottom: 6%;
+}
+.button_info{
+    height: 48px;
+    width: 120px;
+    border-radius: 8px;
+border: 2px solid #E0E0E0;
+background: #EDF0F2;
+margin: 0;
+display: block;
+text-align: center;
+cursor: pointer;
+user-select: none;
+margin-top: -2%;
+margin-left:40%;
+}
+.button_date{
+    height: 48px;
+    width: 120px;
+    border-radius: 8px;
+border: 2px solid #E0E0E0;
+background: #EDF0F2;
+margin: 0;
+display: block;
+text-align: center;
+cursor: pointer;
+user-select: none;
+margin-top: -10%;
+margin-left: 70%;
+}
+
