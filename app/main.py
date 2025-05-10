@@ -38,3 +38,8 @@ def health_check():
 @app.get("/committee", response_class=HTMLResponse)
 async def committee(request: Request):
     return templates.TemplateResponse("committee.html", {"request": request})
+
+# /calendar 라우트 추가
+@app.get("/calendar", response_class=HTMLResponse)
+async def calendar(request: Request):
+    return templates.TemplateResponse("calendar.html", {"request": request})
