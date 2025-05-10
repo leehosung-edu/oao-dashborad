@@ -288,3 +288,34 @@ html, body {
 .schedule-card .agenda {
   color: black;
 }
+
+/* 반응형 디자인 */
+@media screen and (max-width: 768px) {
+  .calendar-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .calendar-section {
+    max-width: 100%;
+    padding: 30px;
+  }
+
+  .schedule-section {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .calendar-grid div {
+    font-size: 1rem;
+  }
+
+  #scheduleList li {
+    padding: 100px 0px;
+    font-size: 1.1rem;
+  }
+
+  .agenda-container {
+    padding: 20px;
+  }
+}
