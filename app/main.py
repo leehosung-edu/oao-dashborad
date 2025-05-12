@@ -30,10 +30,6 @@ async def root(request: Request):
     }
     return templates.TemplateResponse("index.html", ex)
 
-@app.get("/health")
-def health_check():
-    return {"status": "healthy"}
-
 # /committee 라우트 추가
 @app.get("/committee", response_class=HTMLResponse)
 async def committee(request: Request):
@@ -43,3 +39,7 @@ async def committee(request: Request):
 @app.get("/calendar", response_class=HTMLResponse)
 async def calendar(request: Request):
     return templates.TemplateResponse("calendar.html", {"request": request})
+
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy"}
