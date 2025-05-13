@@ -1,8 +1,8 @@
 body {
-display: flex;
-flex-direction: column;
-align-items: center;
-margin: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px;
 }
 main {
     width: 100%;
@@ -17,19 +17,17 @@ main {
     flex-shrink: 0;
     background: #FEF2E0;
     display: flex;
-        min-height: 4224px; /* 최소 높이 4224px 유지 */
-        max-height: calc(100% + 100px); /* 내부 요소 길이에 100px 추가 */
+    min-height: 4224px; /* 최소 높이 4224px 유지 */
+    max-height: calc(100% + 100px); /* 내부 요소 길이에 100px 추가 */
     width: auto;
-flex-direction: column;
-align-items: center;
+    flex-direction: column;
+    align-items: center;
     /* overflow: hidden; */
 }
 .img_container{
     width: 100%;
     border: 1px solid #000;
     box-sizing: border-box;
-
-
 }
 .img_container img{
     width: 100%;
@@ -59,12 +57,12 @@ align-items: center;
 }
 #text2{
     color: #1C1C1C;
-text-align: center;
-font-family: "Noto Sans KR";
-font-size: clamp(9px, 3vw, 32px);
-font-style: normal;
-font-weight: 300;
-margin: 0vw;
+    text-align: center;
+    font-family: "Noto Sans KR";
+    font-size: clamp(9px, 3vw, 32px);
+    font-style: normal;
+    font-weight: 300;
+    margin: 0vw;
 }
 .committe_container{
     display: flex;
@@ -73,13 +71,11 @@ margin: 0vw;
     flex-wrap: wrap;
     justify-content: space-around;
     gap: 20px;
-
     position: relative;
     margin-top: 34%;
-
 }
 .committe_baseset{
- border-radius: 16px;
+    border-radius: 16px;
     background: #FFF;
     box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.05), 0px 0px 0px 0px rgba(0, 0, 0, 0.00), 0px 0px 0px 0px rgba(0, 0, 0, 0.00), 0px 0px 0px 0px rgba(0, 0, 0, 0.00), 0px 0px 0px 0px rgba(0, 0, 0, 0.00);
     width: 521px;
@@ -102,13 +98,12 @@ margin: 0vw;
 .committe_head_baseset{
     border-radius: 16px 16px 0px 0px;
     width: 100%;
-height: 50%;
-margin: 0%;
+    height: 50%;
+    margin: 0%;
 }
 
 #head_HSC{
 background: #1F618D;
-
 }
 #head_LJC{
 background: #7D3C98;
@@ -164,101 +159,99 @@ background: #117864;
 }
 
 .committe_name_ko{
-color: #FFF;
-font-family: "Noto Sans KR";
-font-size: 36px;
-font-style: normal;
-font-weight: 400;
-line-height: 25.6px; /* 71.111% */
-margin-top: -17%;
-margin-left: 32%;
-margin-bottom: 0;
-z-index: 1;
+    color: #FFF;
+    font-family: "Noto Sans KR";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25.6px; /* 71.111% */
+    margin-top: -17%;
+    margin-left: 32%;
+    margin-bottom: 0;
+    z-index: 1;
 }
 #SIBCC_name_ko{
-width: auto;
-line-height: 40px; 
-margin-top: -20%;
+    width: auto;
+    line-height: 40px; 
+    margin-top: -20%;
 }
 #AFROFC_name_ko{
     width: auto;
-line-height: 40px; /* 111.111% */
- margin-top: -20%;
+    line-height: 40px; /* 111.111% */
+    margin-top: -20%;
 }
 #TIESSC_name_ko{
     width: auto;
     line-height: 40px;
     margin-top: -20%;
-
 }
 .committe_name_en{
     color: #FFF;
-font-family: "Noto Sans KR";
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 25.6px; /* 160% */
-transform-origin: left center;
-margin: 0;
-margin-left: 32%;
-margin-top: 2%;
+    font-family: "Noto Sans KR";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25.6px; /* 160% */
+    transform-origin: left center;
+    margin: 0;
+    margin-left: 32%;
+    margin-top: 2%;
 }
 #SIBCC_name_en{
     margin-top: 0%;
 }
 #AFROFC_name_en{
-     margin-top: 0%;
+    margin-top: 0%;
 }
 #TIESSC_name_en{
-     margin-top: 0%;
+    margin-top: 0%;
 }
 .committe_work{
     color: #666;
-font-family: Inter;
-font-size: 16px;
-font-style: normal;
-font-weight: 400;
-line-height: 25.6px; /* 160% */
-margin-top: 21%;
-margin-left: 7%;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25.6px; /* 160% */
+    margin-top: 21%;
+    margin-left: 7%;
 }
 #SIBCC_work{
     margin-top: 6%;
 }
 #AFROFC_work{
-     margin-top: 8%;
-     margin-bottom: 6%;
+    margin-top: 8%;
+    margin-bottom: 6%;
 }
 #TIESSC_work{
-     margin-top: 8%;
-          margin-bottom: 6%;
+    margin-top: 8%;
+    margin-bottom: 6%;
 }
 .button_info{
     height: 48px;
     width: 120px;
     border-radius: 8px;
-border: 2px solid #E0E0E0;
-background: #EDF0F2;
-margin: 0;
-display: block;
-text-align: center;
-cursor: pointer;
-user-select: none;
-margin-top: -2%;
-margin-left:40%;
+    border: 2px solid #E0E0E0;
+    background: #EDF0F2;
+    margin: 0;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    margin-top: -2%;
+    margin-left:40%;
 }
 .button_date{
     height: 48px;
     width: 120px;
     border-radius: 8px;
-border: 2px solid #E0E0E0;
-background: #EDF0F2;
-margin: 0;
-display: block;
-text-align: center;
-cursor: pointer;
-user-select: none;
-margin-top: -10%;
-margin-left: 70%;
+    border: 2px solid #E0E0E0;
+    background: #EDF0F2;
+    margin: 0;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    margin-top: -10%;
+    margin-left: 70%;
 }
-
