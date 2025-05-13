@@ -96,17 +96,16 @@ function committee_goto_info(committee){
 
 
 function committee_goto_date(){
-    window.location.href=`/calendar`;
+    window.location.href=`/calendar?`;
 }
 const parentElement = document.querySelectorAll(".committe_baseset") // 부모 요소 선택
 // console.log(parentElement);
-//  console.log(childElement)
+//  console.log(childElement)       //테스트의 흔적
 parentElement.forEach(element =>{
     const childElement = element.querySelector(".committe_name_ko")
-     console.log(childElement)
     const text = childElement.textContent; // 텍스트 가져오기
 element.innerHTML+=`<span class="button_info" onclick="committee_goto_info('${text}')"><p>위원회 소개</p></span>`
-element.innerHTML+=`                    <span class="button_date" onclick="committee_goto_date()"><p>일정 보기</p></span>`})
-
-//나중어 버튼 한번에 생성할 때 이거 이용해서 버튼 기능도 같이 붙일 예정입니다.
+//정보 찾아오는 함수는 매개변수가 필요합니다. 마침 매개변수가 하나의 클래스를 공유하는군요!
+element.innerHTML+=`<span class="button_date" onclick="committee_goto_date()"><p>일정 보기</p></span>`})
+//나중에 할 일 : 캘린더 연결하는 함수 변화에 맟춰 반영하기
 
