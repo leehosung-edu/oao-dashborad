@@ -4,9 +4,10 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from dotenv import load_dotenv
 from pathlib import Path
-from database.database import *
 from typing import List
-from models.models import *
+# from app.models import *
+# from app.database import *
+
 
 # FastAPI 인스턴스 생성
 app = FastAPI(
@@ -42,21 +43,21 @@ async def committee(request: Request):
 async def calendar(request: Request):
     return templates.TemplateResponse("calendar.html", {"request": request})
 
-# 위원회 상세 조회
-@app.get("/api/committees/{committee_id}", response_model=Committee)
-async def get_committees_with_details(committee_id: int, db: Session = Depends(get_db)):
-    committee = db.exec(Committee.select().where(Committee.id == committee_id)).first()
-    if not committee:
-        raise HTTPException(status_code=404, detail="Committee not found")
-    return committee
+# # 위원회 상세 조회
+# @app.get("/api/committees/{committee_id}", response_model=Committee)
+# async def get_committees_with_details(committee_id: int, db: Session = Depends(get_db)):
+#     committee = db.exec(Committee.select().where(Committee.id == committee_id)).first()
+#     if not committee:
+#         raise HTTPException(status_code=404, detail="Committee not found")
+#     return committee
 
-# 위원회 목록 조회
-@app.get("/api/committees", response_model=List[Committee])
-async def get_committees(db: Session = Depends(get_db)):
-    committees = db.exec(Committee.select()).all()
-    if not committees:
-        raise HTTPException(status_code=404, detail="No committees found")
-    return committees
+# # 위원회 목록 조회
+# @app.get("/api/committees", response_model=List[Committee])
+# async def get_committees(db: Session = Depends(get_db)):
+#     committees = db.exec(Committee.select()).all()
+#     if not committees:
+#         raise HTTPException(status_code=404, detail="No committees found")
+#     return committees
 
 # AWS Health Check 엔드포인트
 @app.get("/health")

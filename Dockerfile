@@ -25,7 +25,7 @@ COPY --from=builder /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
 # 소스코드 복사
-COPY ./app /app
+COPY ./app /app/app
 
 # 시작 스크립트 설정
 COPY ./scripts/start.sh /app/start.sh
