@@ -28,9 +28,10 @@ const parentElement = document.querySelectorAll(".committe_baseset") // 부모 �
 parentElement.forEach(element =>{
     const childElement = element.querySelector(".committe_name_ko")
     const text = childElement.textContent; // 텍스트 가져오기
-element.innerHTML+=`<span class="button_info" onclick="committee_goto_info('${text}')"><p>위원회 소개</p></span>`
-//정보 찾아오는 함수는 매개변수가 필요합니다. 마침 매개변수가 하나의 클래스를 공유하는군요!
-element.innerHTML+=`<span class="button_date" onclick="committee_goto_date()"><p>일정 보기</p></span>`})
+    element.innerHTML+=`<span class="button_info" onclick="committee_goto_info('${text}')"><p>위원회 소개</p></span>`
+    //정보 찾아오는 함수는 매개변수가 필요합니다. 마침 매개변수가 하나의 클래스를 공유하는군요!
+    element.innerHTML+=`<span class="button_date" onclick="committee_goto_date()"><p>일정 보기</p></span>`}
+)
 //나중에 할 일 : 캘린더 연결하는 함수 변화에 맟춰 반영하기
 
 

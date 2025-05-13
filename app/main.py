@@ -2,10 +2,18 @@ from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
+from dotenv import load_dotenv
 from pathlib import Path
+from database.database import *
+from typing import List
+from models.models import *
 
 # FastAPI 인스턴스 생성
-app = FastAPI()
+app = FastAPI(
+    title="OaO-Calendar",
+    description="OaO-Calendar 오픈소스기초프로젝트",
+    version="1.0.0",
+)
 
 # 파일 경로 설정
 BASE_DIR = Path(__file__).resolve().parent
@@ -16,30 +24,41 @@ templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 # 정적 파일 설정
 app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
 
-# 기본 루트 엔드포인트
+# 환경변수 로드
+load_dotenv()
+
+# 루트 라우트
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
-    ex = {
-        "request": request,
-        "message": "FastAPI Test",
-        "items": [
-            {"name": "item1", "price": 100},
-            {"name": "item2", "price": 200},
-            {"name": "item3", "price": 300},
-        ]
-    }
-    return templates.TemplateResponse("index.html", ex)
+    return templates.TemplateResponse("index.html", {"request": request})
 
-# /committee 라우트 추가
+# 위원회 소개 라우트
 @app.get("/committee", response_class=HTMLResponse)
 async def committee(request: Request):
     return templates.TemplateResponse("committee.html", {"request": request})
 
-# /calendar 라우트 추가
+# 위원회별 캘린더 라우트
 @app.get("/calendar", response_class=HTMLResponse)
 async def calendar(request: Request):
     return templates.TemplateResponse("calendar.html", {"request": request})
 
+# 위원회 상세 조회
+@app.get("/api/committees/{committee_id}", response_model=Committee)
+async def get_committees_with_details(committee_id: int, db: Session = Depends(get_db)):
+    committee = db.exec(Committee.select().where(Committee.id == committee_id)).first()
+    if not committee:
+        raise HTTPException(status_code=404, detail="Committee not found")
+    return committee
+
+# 위원회 목록 조회
+@app.get("/api/committees", response_model=List[Committee])
+async def get_committees(db: Session = Depends(get_db)):
+    committees = db.exec(Committee.select()).all()
+    if not committees:
+        raise HTTPException(status_code=404, detail="No committees found")
+    return committees
+
+# AWS Health Check 엔드포인트
 @app.get("/health")
 async def health_check():
     return {"status": "healthy"}

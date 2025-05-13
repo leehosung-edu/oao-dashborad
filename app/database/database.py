@@ -13,6 +13,6 @@ def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
 
 # 데이터베이스 생성
-def get_session():
+def get_db():
     with Session(engine) as session:
         yield session
