@@ -94,6 +94,10 @@ function committee_goto_info(committee){
                                                              //한글 이름을 매개변수로 할 것
 }                                                            //정보창 잘 만드셨더라구요. 놀랐습니다. 이리 간단히 되다니...
 
+
+function committee_goto_date(){
+    window.location.href=`/calendar`;
+}
 const parentElement = document.querySelectorAll(".committe_baseset") // 부모 요소 선택
 // console.log(parentElement);
 //  console.log(childElement)
@@ -101,7 +105,8 @@ parentElement.forEach(element =>{
     const childElement = element.querySelector(".committe_name_ko")
      console.log(childElement)
     const text = childElement.textContent; // 텍스트 가져오기
-element.innerHTML+=`<span class="button_info" onclick="committee_goto_info('${text}')"><p>위원회 소개</p></span>`})
+element.innerHTML+=`<span class="button_info" onclick="committee_goto_info('${text}')"><p>위원회 소개</p></span>`
+element.innerHTML+=`                    <span class="button_date" onclick="committee_goto_date()"><p>일정 보기</p></span>`})
 
 //나중어 버튼 한번에 생성할 때 이거 이용해서 버튼 기능도 같이 붙일 예정입니다.
 
