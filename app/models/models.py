@@ -15,4 +15,4 @@ class Committee(SQLModel, table=True):
 class Member(SQLModel, table=True):
     __tablename__ = "member"
 
-    
+    id: Optional[int] = Field(default=None, primary_key=True)
