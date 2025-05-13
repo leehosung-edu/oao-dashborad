@@ -2,7 +2,8 @@ let chartInstance = null;
 
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
-  const committeeName = params.get('committee');
+  const committeeName = params.get('committee');//committee?committee=위원회 <- 이러면 원하는 위원회로
+                                                //발빠르게 이동 가능
 
   const titleElement = document.getElementById('committee-title');
   const nameElement = document.getElementById('committee-name');
