@@ -255,3 +255,11 @@ background: #117864;
     margin-top: -10%;
     margin-left: 70%;
 }
+@media (min-width: 1200px){
+    .committe_container{
+        display: grid;
+        grid-template-columns: repeat(2,521px);
+        column-gap: 9vw;
+        justify-content: center;
+    }
+}
