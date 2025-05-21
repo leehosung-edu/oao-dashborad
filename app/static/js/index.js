@@ -1,18 +1,3 @@
-//새 창을 띄워주는 코드, 언젠가 누가 쓰겠지...
-    function click_committe_info(title) {
-        const cachelees_url="/static/html/committe_info.html"+"?nocache"+ new Date().getTime()//캐시를 무시하는 코드, 개선 필요
-        var newWindow = window.open(cachelees_url,"_blank");
-        newWindow.onload = function() {
-            newWindow.document.title = title;
-        };
-    }
-    function click_committe_date(title) {
-        const cachelees_url="/static/html/committe_info.html"+"?nocache"+ new Date().getTime()//캐시를 무시하는 코드, 개선 필요
-        var newWindow = window.open(cachelees_url,"_blank");
-        newWindow.onload = function() {
-            newWindow.document.title = title;
-        };
-    }
 function committee_goto_info(committee){
     window.location.href=`/committee?committee=${committee}`;//매게변수로 입력받은 위원회의 정보를 출력해줌
                                                              //한글 이름을 매개변수로 할 것

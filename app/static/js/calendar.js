@@ -25,10 +25,10 @@ const dummySchedules = {
   function renderCalendar(month, year) {
     calendarGrid.innerHTML = "";  // 그리드 초기화
   
-    const firstDay = new Date(year, month, 1).getDay();  // 해당 월의 첫 번째 날짜의 요일
-    const daysInMonth = new Date(year, month + 1, 0).getDate();  // 해당 월의 일수
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
   
-    monthYear.textContent = `${year}년 ${month + 1}월`; // 연도와 월 텍스트
+    monthYear.textContent = `${year}년 ${month + 1}월`;
   
     // 요일 헤더 추가
     weekDays.forEach(day => {
@@ -54,22 +54,51 @@ const dummySchedules = {
       dateText.textContent = day;
       dayDiv.appendChild(dateText);
   
-      // 일정이 있을 경우 점 표시
-      if (dummySchedules[day]) {
-        const types = [...new Set(dummySchedules[day].map(e => e.type))];
-        const dotWrapper = document.createElement("div");
-        dotWrapper.classList.add("calendar-dots");
+      // 점 표시용 래퍼 생성
+      const dotWrapper = document.createElement("div");
+      dotWrapper.classList.add("calendar-dots");
+      dayDiv.appendChild(dotWrapper);
   
-        types.forEach(type => {
-          const dot = document.createElement("div");
-          dot.classList.add("calendar-dot", type);  // 색상 추가
-          dotWrapper.appendChild(dot);
-        });
-  
-        dayDiv.appendChild(dotWrapper);
+      // 점 표시 함수
+      function updateDots() {
+        dotWrapper.innerHTML = ""; // 기존 점 제거
+        if (dummySchedules[day]) {
+          const types = [...new Set(dummySchedules[day].map(e => e.type))];
+          document.querySelectorAll("input[type='checkbox']").forEach(checkbox => {//체크박스마다
+            if (checkbox.checked && types.includes(checkbox.id)) {//체크되어있고 타입이 지정되어 있다면
+              const dot = document.createElement("div");
+              dot.classList.add("calendar-dot", checkbox.id);
+              dotWrapper.appendChild(dot);//calendar-dot 클래스를 가진 div 생성
+            }
+          });
+        }
       }
   
-      // 날짜 클릭 시 일정 표시 및 배경색 변화
+      // 체크박스 변경 이벤트 등록 (최초 한 번만)
+      if (day === 1) {//달력에 날짜를 추가할 때 첫 번째만
+
+        document.querySelectorAll("input[type='checkbox']").forEach(checkbox => {
+          checkbox.addEventListener("change", () => {//아예 checkbox에 이런 기능을 부여함,그래서 add구나!
+            // 모든 날짜 셀의 점을 갱신
+            document.querySelectorAll(".day-cell").forEach(cell => {
+              const dayNum = cell.querySelector("div").textContent;
+              const dots = cell.querySelector(".calendar-dots");
+              if (dots && !isNaN(dayNum)) {
+                // 각 날짜 셀의 updateDots를 호출
+                // dayNum은 문자열이므로 정수로 변환
+                const update = cell.updateDots;//저 밑에 dayDiv.updateDots = updateDots; 이걸 넣었기 따문에 지연스레 함수가 호출된다
+                if (typeof update === "function") update();
+              }
+            });
+          });
+        });
+      }
+  
+      // 각 셀에 updateDots 함수 연결
+      dayDiv.updateDots = updateDots;//js에 이런 문법이 있구나;;;
+      updateDots();
+  
+      // 날짜 클릭 시 일정 표시 및 배경색 변화 (기존 코드 유지)
       dayDiv.addEventListener("click", () => {
         const dateString = `${year}년 ${month + 1}월 ${day}일`;
         document.getElementById("selectedDate").textContent = dateString;
@@ -139,4 +168,3 @@ const dummySchedules = {
   
   // 페이지 로드 시 초기 달력 렌더링
   renderCalendar(currentMonth, currentYear);
-  
