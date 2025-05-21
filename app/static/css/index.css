@@ -27,7 +27,6 @@ main {
 }
 .img_container{
     width: 100%;
-    border: 1px solid #000;
     box-sizing: border-box;
 }
 .img_container img{
