@@ -21,8 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent
 # Jinja2 템플릿 설정
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
-# 정적 파일 설정
-app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
+# 개발 환경 정적 파일 설정
+#app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
+
+# 운영 환경 정적 파일 설정
+app.mount("/static", StaticFiles(directory=str(BASE_DIR / "app/static")), name="static")
 
 # API 라우터 등록
 app.include_router(schedule.router, prefix="/api", tags=["schedules"])
