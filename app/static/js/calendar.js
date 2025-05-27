@@ -1,16 +1,24 @@
-const dummySchedules = {
-    5: [
-      { time: "10:00", title: "전체회의", type: "General", agenda: "형사소송법 일부개정법률안" },
-      { time: "12:30", title: "법안심사제1소위원회", type: "Small", agenda: "검사징계법 일부개정법률안" }
-    ],
-    15: [
-      { time: "17:00", title: "전체회의", type: "General", agenda: "도시 및 주거환경정비법 일부개정법률안" }
-    ],
-    25: [
-      { time: "12:00", title: "청문회", type: "Hearing", agenda: "국무위원후보자 인사청문요청안" }
-    ]
-  };
-  
+const params = new URLSearchParams(window.location.search);
+const committeeKo = params.get("committee");      // 한글명
+const committeeEn = params.get("committee_en");   // 영문명
+const useName = params.get("use_name") === "true";
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (committeeKo) {
+    document.getElementById('committeeKo').textContent = committeeKo;
+  }
+  if (committeeEn) {
+    document.getElementById('committeeEn').textContent = committeeEn;
+  }
+});
+
+async function fetchSchedules(committee, year, month, useName) {
+  let url = `/api/schedules/?committee=${encodeURIComponent(committee)}&year=${year}&month=${month}`;
+  if (useName) url += "&use_name=true";
+  const res = await fetch(url);
+  return await res.json();
+}
+
   const calendarGrid = document.getElementById("calendarGrid");
   const monthYear = document.getElementById("monthYear");
   const prevBtn = document.getElementById("prevMonthBtn");
@@ -22,14 +30,26 @@ const dummySchedules = {
   
   const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
   
-  function renderCalendar(month, year) {
-    calendarGrid.innerHTML = "";  // 그리드 초기화
+  async function renderCalendar(month, year) {
   
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
   
-    monthYear.textContent = `${year}년 ${month + 1}월`;
-  
+
+    monthYear.textContent = `${year}년 ${month + 1}월`; // 연도와 월 텍스트
+
+    const schedules = await fetchSchedules(committeeKo, year, month + 1, useName);
+
+    calendarGrid.innerHTML = "";  // 그리드 초기화
+
+    // 날짜별로 그룹핑
+    const scheduleMap = {};
+    schedules.forEach(item => {
+      const day = Number(item.date.split('-')[2]);
+      if (!scheduleMap[day]) scheduleMap[day] = [];
+      scheduleMap[day].push(item);
+    });
+    
     // 요일 헤더 추가
     weekDays.forEach(day => {
       const dayDiv = document.createElement("div");
@@ -53,11 +73,11 @@ const dummySchedules = {
       const dateText = document.createElement("div");
       dateText.textContent = day;
       dayDiv.appendChild(dateText);
-  
-      // 점 표시용 래퍼 생성
+        // 점 표시용 래퍼 생성
       const dotWrapper = document.createElement("div");
       dotWrapper.classList.add("calendar-dots");
       dayDiv.appendChild(dotWrapper);
+
   
       // 점 표시 함수
       function updateDots() {
@@ -118,8 +138,8 @@ const dummySchedules = {
         // 선택된 날짜 셀에 클래스 추가
         dayDiv.classList.add("selected");
   
-        if (dummySchedules[day]) {
-          dummySchedules[day].forEach(item => {
+        if (scheduleMap[day]) {
+          scheduleMap[day].forEach(item => {
             const card = document.createElement("div");
             card.classList.add("schedule-card", item.type); // 색상에 따라 클래스 추가
   
@@ -130,7 +150,7 @@ const dummySchedules = {
             `;
             // 일정 클릭 시 안건 상세 내용 표시
             card.addEventListener("click", () => {
-              agendaDetail.textContent = `✔ ${item.agenda}`;
+              agendaDetail.innerHTML = `${item.agenda}`;
             });
   
             scheduleList.appendChild(card);

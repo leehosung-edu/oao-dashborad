@@ -5,8 +5,8 @@ from fastapi.responses import HTMLResponse
 from dotenv import load_dotenv
 from pathlib import Path
 from typing import List
-# from app.models import *
-# from app.database import *
+from app.api.endpoints import schedule
+import os
 
 
 # FastAPI 인스턴스 생성
@@ -22,8 +22,16 @@ BASE_DIR = Path(__file__).resolve().parent
 # Jinja2 템플릿 설정
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
-# 정적 파일 설정
-app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
+# 개발 환경 정적 파일 설정
+#app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
+
+# 운영 환경 정적 파일 설정
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+# API 라우터 등록
+app.include_router(schedule.router, prefix="/api", tags=["schedules"])
 
 # 환경변수 로드
 load_dotenv()
@@ -42,22 +50,6 @@ async def committee(request: Request):
 @app.get("/calendar", response_class=HTMLResponse)
 async def calendar(request: Request):
     return templates.TemplateResponse("calendar.html", {"request": request})
-
-# # 위원회 상세 조회
-# @app.get("/api/committees/{committee_id}", response_model=Committee)
-# async def get_committees_with_details(committee_id: int, db: Session = Depends(get_db)):
-#     committee = db.exec(Committee.select().where(Committee.id == committee_id)).first()
-#     if not committee:
-#         raise HTTPException(status_code=404, detail="Committee not found")
-#     return committee
-
-# # 위원회 목록 조회
-# @app.get("/api/committees", response_model=List[Committee])
-# async def get_committees(db: Session = Depends(get_db)):
-#     committees = db.exec(Committee.select()).all()
-#     if not committees:
-#         raise HTTPException(status_code=404, detail="No committees found")
-#     return committees
 
 # AWS Health Check 엔드포인트
 @app.get("/health")
