@@ -16,7 +16,8 @@ async function fetchSchedules(committee, year, month, useName) {
   let url = `/api/schedules/?committee=${encodeURIComponent(committee)}&year=${year}&month=${month}`;
   if (useName) url += "&use_name=true";
   const res = await fetch(url);
-  return await res.json();
+  const data=await res.json();
+  return Array.isArray(data) ? data : [];
 }
 
   const calendarGrid = document.getElementById("calendarGrid");
@@ -48,8 +49,7 @@ async function fetchSchedules(committee, year, month, useName) {
       const day = Number(item.date.split('-')[2]);
       if (!scheduleMap[day]) scheduleMap[day] = [];
       scheduleMap[day].push(item);
-    });
-    
+    });    
     // 요일 헤더 추가
     weekDays.forEach(day => {
       const dayDiv = document.createElement("div");
