@@ -11,7 +11,7 @@ services:
       env_file:
         - .env  # 환경변수 파일
       volumes:
-        - ./app:/app/app    # 소스코드 로컬 ./app, 컨테이너 /app/app
+        - ./app:/app    # 소스코드 로컬 ./app, 컨테이너 /app/app
         - ./data:/app/data  # 데이터 로컬 ./data, 컨테이너 /app/data
       network: 
         - app-network # 네트워크 설정
