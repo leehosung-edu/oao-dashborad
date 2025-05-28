@@ -12,6 +12,14 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+window.onload=function(){
+  let checkboxs=document.querySelectorAll("input[type=checkbox]")
+  checkboxs.forEach(checkbox=>{
+    checkbox.checked=true;
+    checkbox.dispatchEvent(new Event("change"));
+  });
+}
+
 async function fetchSchedules(committee, year, month, useName) {
   let url = `/api/schedules/?committee=${encodeURIComponent(committee)}&year=${year}&month=${month}`;
   if (useName) url += "&use_name=true";
@@ -49,7 +57,8 @@ async function fetchSchedules(committee, year, month, useName) {
       const day = Number(item.date.split('-')[2]);
       if (!scheduleMap[day]) scheduleMap[day] = [];
       scheduleMap[day].push(item);
-    });    
+    });
+    
     // 요일 헤더 추가
     weekDays.forEach(day => {
       const dayDiv = document.createElement("div");
