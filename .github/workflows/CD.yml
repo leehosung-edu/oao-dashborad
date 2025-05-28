@@ -34,7 +34,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      
+
+      # .env 파일 생성
+      - name: Create .env file from secrets
+        run: |
+          echo "OPEN_API_KEY=${{ secrets.OPEN_API_KEY }}" >> .env
+
       # Docker 이미지 빌드
       - name: Build Docker Image
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/oao_cicd_action .
