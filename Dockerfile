@@ -27,6 +27,9 @@ ENV PATH="/opt/venv/bin:$PATH"
 # 소스코드 복사
 COPY ./app /app
 
+# 환경 변수 설정
+COPY .env .env
+
 # 시작 스크립트 설정
 COPY ./scripts/start.sh /app/start.sh
 RUN chmod +x /app/start.sh
