@@ -14,10 +14,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 async function fetchSchedules(committee, year, month, useName) {
   let url = `/api/schedules/?committee=${encodeURIComponent(committee)}&year=${year}&month=${month}`;
+  //console.log(url)
   if (useName) url += "&use_name=true";
   const res = await fetch(url);
   const data=await res.json();
-  return Array.isArray(data) ? data : [];
+   return Array.isArray(data) ? data : [];
+  //return data;
 }
 
   const calendarGrid = document.getElementById("calendarGrid");
@@ -39,17 +41,34 @@ async function fetchSchedules(committee, year, month, useName) {
 
     monthYear.textContent = `${year}년 ${month + 1}월`; // 연도와 월 텍스트
 
-    const schedules = await fetchSchedules(committeeKo, year, month + 1, useName);
+const schedules = await fetchSchedules(committeeKo, year, month + 1, useName);
 
-    calendarGrid.innerHTML = "";  // 그리드 초기화
+if (!schedules || !Array.isArray(schedules)) {
+    console.error("schedules 데이터가 올바르지 않습니다:", schedules);
+    return;
+}
+//console.log(schedules)
+calendarGrid.innerHTML = "";  // 그리드 초기화
 
-    // 날짜별로 그룹핑
-    const scheduleMap = {};
-    schedules.forEach(item => {
-      const day = Number(item.date.split('-')[2]);
-      if (!scheduleMap[day]) scheduleMap[day] = [];
-      scheduleMap[day].push(item);
-    });
+let scheduleMap = {};  // 변경 가능하도록 let 사용
+
+schedules.forEach(item => {
+    if (item.date) {
+        const dateParts = item.date.split('-');
+        const day = Number(dateParts[2]);
+
+        if (!isNaN(day)) {
+            if (!scheduleMap[day]) scheduleMap[day] = [];
+            scheduleMap[day].push(item);
+        } else {
+            console.error("올바르지 않은 날짜 값:", item.date);
+        }
+    } else {
+        console.error("date 값이 없습니다:", item);
+    }
+});
+
+//console.log("최종 scheduleMap:", scheduleMap);
     
     // 요일 헤더 추가
     weekDays.forEach(day => {
@@ -75,6 +94,24 @@ async function fetchSchedules(committee, year, month, useName) {
       dateText.textContent = day;
       dayDiv.appendChild(dateText);
   
+      
+
+     // 점 표시
+        if (scheduleMap[day]) {
+          const types = [...new Set(scheduleMap[day].map(e => e.type))];
+          const dotWrapper = document.createElement("div");
+          dotWrapper.classList.add("calendar-dots");
+
+          types.forEach(type => {
+          const dot = document.createElement("div");
+          dot.classList.add("calendar-dot", type);  // 색상 추가
+          dotWrapper.appendChild(dot);
+        });
+  
+        dayDiv.appendChild(dotWrapper);
+        }
+      
+
       // 날짜 클릭 시 일정 표시 및 배경색 변화 (기존 코드 유지)
       dayDiv.addEventListener("click", () => {
         const dateString = `${year}년 ${month + 1}월 ${day}일`;
