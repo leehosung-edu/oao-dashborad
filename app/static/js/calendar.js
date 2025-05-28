@@ -82,8 +82,8 @@ async function fetchSchedules(committee, year, month, useName) {
       // 점 표시 함수
       function updateDots() {
         dotWrapper.innerHTML = ""; // 기존 점 제거
-        if (dummySchedules[day]) {
-          const types = [...new Set(dummySchedules[day].map(e => e.type))];
+        if (scheduleMap[day]) {
+          const types = [...new Set(scheduleMap[day].map(e => e.type))];
           document.querySelectorAll("input[type='checkbox']").forEach(checkbox => {//체크박스마다
             if (checkbox.checked && types.includes(checkbox.id)) {//체크되어있고 타입이 지정되어 있다면
               const dot = document.createElement("div");
