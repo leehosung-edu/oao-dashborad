@@ -1,8 +1,13 @@
 from sqlmodel import SQLModel, create_engine, Session
+from pathlib import Path
+import os
 
 # SQLite database URL
-sqllite_file_name = "/app/data/database.db"
-sqlite_url = f"sqlite:///{sqllite_file_name}"
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+DATA_DIR = BASE_DIR / "data"
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+DB_PATH = DATA_DIR / "database.db"
+sqlite_url = f"sqlite:///{DB_PATH}"
 
 # SQLite database 연결
 connect_args = {"check_same_thread": False}
