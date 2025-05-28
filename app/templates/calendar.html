@@ -28,8 +28,8 @@
 <body>
   <!-- 배너 -->
   <header class="main-header">
-    <h1>법제사법위원회</h1>
-    <p>Legislation and Judiciary Committee</p>
+    <h1 id="committeeKo"></h1>
+    <p id="committeeEn"></p>
   </header>
 
   <!-- 달력 + 일정 카드 -->
@@ -45,10 +45,10 @@
 
       <!-- 달력 내부 색상 -->
       <div class="legend-container in-calendar">
-        <span><span class="dot General"></span> 전체회의</span>
-        <span><span class="dot Small"></span> 소위원회</span>
-        <span><span class="dot Public"></span> 공청회</span>
-        <span><span class="dot Hearing"></span> 청문회</span>
+        <span><span class="dot General"></span> 전체회의<input type="checkbox" id="General"></span>
+        <span><span class="dot Small"></span> 소위원회<input type="checkbox" id="Small"></span>
+        <span><span class="dot Public"></span> 공청회<input type="checkbox" id="Public"></span>
+        <span><span class="dot Hearing"></span> 청문회<input type="checkbox" id="Hearing"></span>
       </div>
     </div>
 
@@ -63,7 +63,7 @@
 
   <!-- 안건 카드 -->
   <div class="agenda-container card">
-    <h3>안건명</h3>
+    <h3>✔ 안건명</h3>
     <p id="agendaDetail">일정을 선택하면 이곳에 상세 내용이 표시됩니다.</p>
   </div>
 

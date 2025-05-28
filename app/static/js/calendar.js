@@ -1,16 +1,24 @@
-const dummySchedules = {
-    5: [
-      { time: "10:00", title: "전체회의", type: "General", agenda: "형사소송법 일부개정법률안" },
-      { time: "12:30", title: "법안심사제1소위원회", type: "Small", agenda: "검사징계법 일부개정법률안" }
-    ],
-    15: [
-      { time: "17:00", title: "전체회의", type: "General", agenda: "도시 및 주거환경정비법 일부개정법률안" }
-    ],
-    25: [
-      { time: "12:00", title: "청문회", type: "Hearing", agenda: "국무위원후보자 인사청문요청안" }
-    ]
-  };
-  
+const params = new URLSearchParams(window.location.search);
+const committeeKo = params.get("committee");      // 한글명
+const committeeEn = params.get("committee_en");   // 영문명
+const useName = params.get("use_name") === "true";
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (committeeKo) {
+    document.getElementById('committeeKo').textContent = committeeKo;
+  }
+  if (committeeEn) {
+    document.getElementById('committeeEn').textContent = committeeEn;
+  }
+});
+
+async function fetchSchedules(committee, year, month, useName) {
+  let url = `/api/schedules/?committee=${encodeURIComponent(committee)}&year=${year}&month=${month}`;
+  if (useName) url += "&use_name=true";
+  const res = await fetch(url);
+  return await res.json();
+}
+
   const calendarGrid = document.getElementById("calendarGrid");
   const monthYear = document.getElementById("monthYear");
   const prevBtn = document.getElementById("prevMonthBtn");
@@ -22,14 +30,26 @@ const dummySchedules = {
   
   const weekDays = ["일", "월", "화", "수", "목", "금", "토"];
   
-  function renderCalendar(month, year) {
-    calendarGrid.innerHTML = "";  // 그리드 초기화
+  async function renderCalendar(month, year) {
   
-    const firstDay = new Date(year, month, 1).getDay();  // 해당 월의 첫 번째 날짜의 요일
-    const daysInMonth = new Date(year, month + 1, 0).getDate();  // 해당 월의 일수
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
   
+
     monthYear.textContent = `${year}년 ${month + 1}월`; // 연도와 월 텍스트
-  
+
+    const schedules = await fetchSchedules(committeeKo, year, month + 1, useName);
+
+    calendarGrid.innerHTML = "";  // 그리드 초기화
+
+    // 날짜별로 그룹핑
+    const scheduleMap = {};
+    schedules.forEach(item => {
+      const day = Number(item.date.split('-')[2]);
+      if (!scheduleMap[day]) scheduleMap[day] = [];
+      scheduleMap[day].push(item);
+    });
+    
     // 요일 헤더 추가
     weekDays.forEach(day => {
       const dayDiv = document.createElement("div");
@@ -53,23 +73,52 @@ const dummySchedules = {
       const dateText = document.createElement("div");
       dateText.textContent = day;
       dayDiv.appendChild(dateText);
+        // 점 표시용 래퍼 생성
+      const dotWrapper = document.createElement("div");
+      dotWrapper.classList.add("calendar-dots");
+      dayDiv.appendChild(dotWrapper);
+
   
-      // 일정이 있을 경우 점 표시
-      if (dummySchedules[day]) {
-        const types = [...new Set(dummySchedules[day].map(e => e.type))];
-        const dotWrapper = document.createElement("div");
-        dotWrapper.classList.add("calendar-dots");
-  
-        types.forEach(type => {
-          const dot = document.createElement("div");
-          dot.classList.add("calendar-dot", type);  // 색상 추가
-          dotWrapper.appendChild(dot);
-        });
-  
-        dayDiv.appendChild(dotWrapper);
+      // 점 표시 함수
+      function updateDots() {
+        dotWrapper.innerHTML = ""; // 기존 점 제거
+        if (dummySchedules[day]) {
+          const types = [...new Set(dummySchedules[day].map(e => e.type))];
+          document.querySelectorAll("input[type='checkbox']").forEach(checkbox => {//체크박스마다
+            if (checkbox.checked && types.includes(checkbox.id)) {//체크되어있고 타입이 지정되어 있다면
+              const dot = document.createElement("div");
+              dot.classList.add("calendar-dot", checkbox.id);
+              dotWrapper.appendChild(dot);//calendar-dot 클래스를 가진 div 생성
+            }
+          });
+        }
       }
   
-      // 날짜 클릭 시 일정 표시 및 배경색 변화
+      // 체크박스 변경 이벤트 등록 (최초 한 번만)
+      if (day === 1) {//달력에 날짜를 추가할 때 첫 번째만
+
+        document.querySelectorAll("input[type='checkbox']").forEach(checkbox => {
+          checkbox.addEventListener("change", () => {//아예 checkbox에 이런 기능을 부여함,그래서 add구나!
+            // 모든 날짜 셀의 점을 갱신
+            document.querySelectorAll(".day-cell").forEach(cell => {
+              const dayNum = cell.querySelector("div").textContent;
+              const dots = cell.querySelector(".calendar-dots");
+              if (dots && !isNaN(dayNum)) {
+                // 각 날짜 셀의 updateDots를 호출
+                // dayNum은 문자열이므로 정수로 변환
+                const update = cell.updateDots;//저 밑에 dayDiv.updateDots = updateDots; 이걸 넣었기 따문에 지연스레 함수가 호출된다
+                if (typeof update === "function") update();
+              }
+            });
+          });
+        });
+      }
+  
+      // 각 셀에 updateDots 함수 연결
+      dayDiv.updateDots = updateDots;//js에 이런 문법이 있구나;;;
+      updateDots();
+  
+      // 날짜 클릭 시 일정 표시 및 배경색 변화 (기존 코드 유지)
       dayDiv.addEventListener("click", () => {
         const dateString = `${year}년 ${month + 1}월 ${day}일`;
         document.getElementById("selectedDate").textContent = dateString;
@@ -89,8 +138,8 @@ const dummySchedules = {
         // 선택된 날짜 셀에 클래스 추가
         dayDiv.classList.add("selected");
   
-        if (dummySchedules[day]) {
-          dummySchedules[day].forEach(item => {
+        if (scheduleMap[day]) {
+          scheduleMap[day].forEach(item => {
             const card = document.createElement("div");
             card.classList.add("schedule-card", item.type); // 색상에 따라 클래스 추가
   
@@ -101,7 +150,7 @@ const dummySchedules = {
             `;
             // 일정 클릭 시 안건 상세 내용 표시
             card.addEventListener("click", () => {
-              agendaDetail.textContent = `✔ ${item.agenda}`;
+              agendaDetail.innerHTML = `${item.agenda}`;
             });
   
             scheduleList.appendChild(card);
@@ -139,4 +188,3 @@ const dummySchedules = {
   
   // 페이지 로드 시 초기 달력 렌더링
   renderCalendar(currentMonth, currentYear);
-  

@@ -5,6 +5,9 @@ from fastapi.responses import HTMLResponse
 from dotenv import load_dotenv
 from pathlib import Path
 from typing import List
+from app.api.endpoints import schedule
+import os
+
 
 # FastAPI 인스턴스 생성
 app = FastAPI(
@@ -19,8 +22,16 @@ BASE_DIR = Path(__file__).resolve().parent
 # Jinja2 템플릿 설정
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
-# 정적 파일 설정
-app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
+# 개발 환경 정적 파일 설정
+#app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
+
+# 운영 환경 정적 파일 설정
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+# API 라우터 등록
+app.include_router(schedule.router, prefix="/api", tags=["schedules"])
 
 # 환경변수 로드
 load_dotenv()
