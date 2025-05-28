@@ -5,7 +5,7 @@ from fastapi.responses import HTMLResponse
 from dotenv import load_dotenv
 from pathlib import Path
 from typing import List
-from .api.endpoints import schedule
+from app.api.endpoints import schedule
 import os
 
 
