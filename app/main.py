@@ -5,9 +5,9 @@ from fastapi.responses import HTMLResponse
 from dotenv import load_dotenv
 from pathlib import Path
 from typing import List
-from api.endpoints import schedule
+from app.api.endpoints import schedule
 import os
-
+import httpx
 
 # FastAPI 인스턴스 생성
 app = FastAPI(
@@ -55,3 +55,19 @@ async def calendar(request: Request):
 @app.get("/health")
 async def health_check():
     return {"status": "healthy"}
+
+# 위원회 정보 API 프록시 라우트 추가
+@app.get("/api/committee-data", response_class=HTMLResponse)
+async def proxy_committee_data(request, committee: str):
+    api_key = os.getenv("OPEN_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=500, detail="API key not found in environment variables")
+    
+    encoded_committee = committee.strip()
+    api_url = f"https://open.assembly.go.kr/portal/openapi/nktulghcadyhmiqxi?KEY={api_key}&Type=xml&DEPT_NM={encoded_committee}"
+
+    async with httpx.AsyncClient() as client:
+        response = await client.get(api_url)
+        if response.status_code != 200:
+            return HTMLResponse(content="외부 API 호출 실패", status_code=500)
+        return HTMLResponse(content=response.text, media_type="application/xml")

@@ -10,9 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   titleElement.textContent = committeeName;
 
-  const apiKey = "4fe9bc19cebe4adcb232914ba158d7e2";
   const encodedCommittee = encodeURIComponent(committeeName);
-  const apiUrl = `https://open.assembly.go.kr/portal/openapi/nktulghcadyhmiqxi?KEY=${apiKey}&Type=xml&DEPT_NM=${encodedCommittee}`;
+  const apiUrl = `/api/committee-data?committee=${encodedCommittee}`;
 
   fetch(apiUrl)
     .then(response => {
