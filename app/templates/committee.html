@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>위원회 정보</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/static/css/committee.css" />
+  <link rel="stylesheet" href="{{ url_for('static', path='css/committee.css') }}" />
   <link 
     rel="apple-touch-icon"
     sizes="180x180"
@@ -85,6 +85,6 @@
     &copy; OAO
   </footer>
 
-  <script src="/static/js/committee.js"></script>
+  <script src="{{ url_for('static', path='js/committee.js') }}" defer></script>
 </body>
 </html>

@@ -5,7 +5,7 @@ from fastapi.responses import HTMLResponse
 from dotenv import load_dotenv
 from pathlib import Path
 from typing import List
-from api.endpoints import schedule
+from app.api.endpoints import schedule
 import os
 import httpx
 
@@ -58,7 +58,11 @@ async def health_check():
 
 # 위원회 정보 API 프록시 라우트 추가
 @app.get("/api/committee-data", response_class=HTMLResponse)
-async def proxy_committee_data(request, committee: str):
+async def committee_data(request: Request):
+    committee = request.query_params.get("committee")
+    if not committee:
+        raise HTTPException(status_code=400, detail="Committee name is required")
+    
     api_key = os.getenv("OPEN_API_KEY")
     if not api_key:
         raise HTTPException(status_code=500, detail="API key not found in environment variables")
