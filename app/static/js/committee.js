@@ -2,17 +2,11 @@ let chartInstance = null;
 
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
-  const committeeName = params.get('committee');//committee?committee=위원회 <- 이러면 원하는 위원회로
-                                                //발빠르게 이동 가능
+  const committeeName = params.get('committee');
 
   const titleElement = document.getElementById('committee-title');
   const nameElement = document.getElementById('committee-name');
   const container = document.getElementById('card-container');
-
-  /* if (!committeeName) {
-    titleElement.textContent = "위원회를 지정해주세요.";
-    return;
-  } */
 
   titleElement.textContent = committeeName;
 
@@ -35,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // 역할 우선순위 정렬 (위원장 → 간사 → 위원)
+      // 역할 우선순위 정렬
       rows.sort((a, b) => {
         const getPriority = role => {
           if (role.includes("위원장")) return 0;
@@ -59,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .map(([party, count]) => ({ party, count, percent: (count / total * 100).toFixed(1) }))
         .sort((a, b) => b.percent - a.percent);
 
-      // 정당 요약표 출력
+      // 요약 테이블 출력
       let summaryHTML = `
         <table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
           <thead>
@@ -82,11 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
       summaryHTML += `</tbody></table>`;
       document.getElementById('party-summary').innerHTML = summaryHTML;
 
-      // 차트 출력
+      // 도넛 차트 출력
       const ctx = document.getElementById('party-chart').getContext('2d');
-      if (chartInstance) {
-        chartInstance.destroy();
-      }
+      if (chartInstance) chartInstance.destroy();
       chartInstance = new Chart(ctx, {
         type: 'doughnut',
         data: {
@@ -98,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         options: {
           responsive: true,
-          maintainAspectRatio: false, 
+          maintainAspectRatio: false,
           plugins: {
             legend: { position: 'bottom' },
             tooltip: {
@@ -110,49 +102,78 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      // 위원 카드 출력
-      //nameElement.innerHTML = `<h2>위원 (${rows.length}명)</h2>`;
-      container.innerHTML = ""; // 기존 내용 초기화
+      // 카드 출력
+      container.innerHTML = "";
       for (const row of rows) {
         const role = row.getElementsByTagName("JOB_RES_NM")[0]?.textContent || "구성 없음";
         const name = row.getElementsByTagName("HG_NM")[0]?.textContent || "이름 없음";
         const party = row.getElementsByTagName("POLY_NM")[0]?.textContent || "정당 없음";
         const district = row.getElementsByTagName("ORIG_NM")[0]?.textContent || "지역구 없음";
-       
-       	const roleClass = role.includes("위원장") ? "role-chair" :
-                    role.includes("간사") ? "role-secretary" : "role-member";
+
+        const roleClass = role.includes("위원장") ? "role-chair" :
+                          role.includes("간사") ? "role-secretary" : "role-member";
 
         const card = document.createElement("div");
         card.className = "card";
-        
         card.innerHTML = `
-    			<div class="top-row">
-     		  <span class="role ${roleClass}">${role}</span>
-     		  <span class="party">${party}</span>
-    			</div>
-    			<h3 class="name">${name}</h3>
-    			<p class="district">${district}</p>
-  			`;
+          <div class="top-row">
+            <span class="role ${roleClass}">${role}</span>
+            <span class="party">${party}</span>
+          </div>
+          <h3 class="name">${name}</h3>
+          <p class="district">${district}</p>
+        `;
 
         const email = row.getElementsByTagName("ASSEM_EMAIL")[0]?.textContent || "-";
-				const phone = row.getElementsByTagName("ASSEM_TEL")[0]?.textContent || "-";
+        const phone = row.getElementsByTagName("ASSEM_TEL")[0]?.textContent || "-";
+        const gender = row.getElementsByTagName("NAAS_NM")[0]?.textContent || "-";
+        const birth = row.getElementsByTagName("BIRTH_DT")[0]?.textContent || "-";
+        const aides = row.getElementsByTagName("STAFF")[0]?.textContent || "-";
+        const secretaries = row.getElementsByTagName("SECRETARY")[0]?.textContent || "-";
+        const secretariesAssistants = row.getElementsByTagName("SECRETARY2")[0]?.textContent || "-";
+        const office = row.getElementsByTagName("ROOM_NO")[0]?.textContent || "-";
 
-				// 클릭 시 팝업 표시
-				card.addEventListener("click", () => {
-  			document.getElementById("popup-email").textContent = email;
-  			document.getElementById("popup-phone").textContent = phone;
-  			document.getElementById("popup-overlay").classList.remove("hidden");
-				});
+        // 팝업 열기
+        card.addEventListener("click", () => {
+          document.getElementById("popup-email").textContent = email;
+          document.getElementById("popup-phone").textContent = phone;
+          document.getElementById("popup-name").textContent = name;
+          document.getElementById("popup-gender").textContent = gender;
+          document.getElementById("popup-birth").textContent = birth;
+          document.getElementById("popup-aides").textContent = aides;
+          document.getElementById("popup-secretaries").textContent = secretaries;
+          document.getElementById("popup-secretaries-assistants").textContent = secretariesAssistants;
+          document.getElementById("popup-office").textContent = office;
 
-      container.appendChild(card);
+          document.querySelectorAll('.popup-tab').forEach(btn => btn.classList.remove('active'));
+          document.querySelector('[data-tab="data"]').classList.add('active');
+          document.querySelectorAll('.popup-tab-content').forEach(tab => tab.classList.add('hidden'));
+          document.getElementById("tab-data").classList.remove("hidden");
+
+          document.getElementById("popup-overlay").classList.remove("hidden");
+        });
+
+        container.appendChild(card);
       }
 
       document.getElementById("popup-close").addEventListener("click", () => {
         document.getElementById("popup-overlay").classList.add("hidden");
-      });             
-
+      });
     })
     .catch(err => {
       nameElement.innerHTML = `<p>오류: ${err.message}</p>`;
     });
+
+  // 탭 전환
+  document.querySelectorAll('.popup-tab').forEach(button => {
+    button.addEventListener('click', () => {
+      const target = button.dataset.tab;
+
+      document.querySelectorAll('.popup-tab').forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      document.querySelectorAll('.popup-tab-content').forEach(tab => tab.classList.add('hidden'));
+      document.getElementById(`tab-${target}`).classList.remove('hidden');
+    });
+  });
 });
