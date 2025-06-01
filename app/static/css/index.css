@@ -246,6 +246,8 @@ background: #117864;
     user-select: none;
     margin-top: 2%;
     margin-left:40%;
+
+    position: relative;
 }
 .button_date{
     height: 48px;
@@ -260,6 +262,14 @@ background: #117864;
     user-select: none;
     margin-top: -9%;
     margin-left: 70%;
+
+    position: relative;
+}
+
+.button_text{
+    position:  absolute;
+    top: 8px;
+    left: 24px;
 }
 .agendaContainer-main{
     width: 100%;

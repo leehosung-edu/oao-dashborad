@@ -7,8 +7,8 @@ parentElement.forEach(element => {
     const koName = koEl.textContent.replace(/\s+/g, ' ').trim();
     const enName = enEl.textContent.replace(/\s+/g, ' ').trim();
 
-    element.innerHTML += `<span class="button_info" onclick="committee_goto_info('${koName}')"><p>위원회 소개</p></span>`;
-    element.innerHTML += `<span class="button_date" onclick="committee_goto_date('${koName}','${enName}')"><p>일정 보기</p></span>`;
+    element.innerHTML += `<span class="button_info" onclick="committee_goto_info('${koName}')"><p class="button_text">위원회 소개</p></span>`;
+    element.innerHTML += `<span class="button_date" onclick="committee_goto_date('${koName}','${enName}')"><p class="button_text">일정 보기</p></span>`;
 });
 
 function committee_goto_info(koName){
