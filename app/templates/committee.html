@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>위원회 정보</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/static/css/committee.css" />
+  <link rel="stylesheet" href="{{ url_for('static', path='css/committee.css') }}" />
   <link 
     rel="apple-touch-icon"
     sizes="180x180"
@@ -45,10 +45,39 @@
     <!-- 팝업 모달 -->
 	<div id="popup-overlay" class="hidden">
   	<div class="popup-box">
+      <div class="popup-sidebar">
+        <ul>
+          <li><button class="popup-tab active" data-tab="data">인적사항</button></li>
+          <li><button class="popup-tab" data-tab="school">학교 관련 경력</button></li>
+          <li><button class="popup-tab" data-tab="congress">민간 및 국회 관련 경력</button></li>
+          <li><button class="popup-tab" data-tab="contact">연락처</button></li>
+        </ul>
+      </div>
+      <div class="popup-content"></div>
     	<button id="popup-close">×</button>
+      <div class="popup-tab-content" id="tab-data">
+        <h2>인적사항</h2>
+        <p><strong>이름</strong><br><span id="popup-name"></span></p>
+        <p><strong>성별</strong><br><span id="popup-gender"></span></p>
+        <p><strong>생년월일</strong><br><span id="popup-birth"></span></p>
+        <p><strong>보좌관</strong><br><span id="popup-aides"></span></p>
+        <p><strong>비서관</strong><br><span id="popup-secretaries"></span></p>
+        <p><strong>비서</strong><br><span id="popup-secretaries-assistants"></span></p>
+        <p><strong>위원실</strong><br><span id="popup-office"></span></p>
+      </div>
+      <div class="popup-tab-content hidden" id="tab-school">
+        <h2>학교 관련 경력</h2>
+        <p><strong></strong><br><span id="popup-school"></span></p>
+      </div>
+      <div class="popup-tab-content hidden" id="tab-congress">
+        <h2>민간 및 국회 관련 경력</h2>
+        <p><strong></strong><br><span id="popup-congress"></span></p>
+      </div>
+      <div class="popup-tab-content hidden" id="tab-contact">
     	<h2>연락처</h2>
     	<p><strong>이메일</strong><br><span id="popup-email"></span></p>
     	<p><strong>전화번호</strong><br><span id="popup-phone"></span></p>
+      </div>
   	</div>
 	</div>
 
@@ -56,6 +85,6 @@
     &copy; OAO
   </footer>
 
-  <script src="/static/js/committee.js"></script>
+  <script src="{{ url_for('static', path='js/committee.js') }}" defer></script>
 </body>
 </html>

@@ -5,9 +5,9 @@ from fastapi.responses import HTMLResponse
 from dotenv import load_dotenv
 from pathlib import Path
 from typing import List
-from app.api.endpoints import schedule
+from api.endpoints import schedule
 import os
-
+import httpx
 
 # FastAPI 인스턴스 생성
 app = FastAPI(
@@ -23,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
 # 개발 환경 정적 파일 설정
-#app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
+app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
 
 # 운영 환경 정적 파일 설정
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_DIR = os.path.join(BASE_DIR, "static")
-app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# STATIC_DIR = os.path.join(BASE_DIR, "static")
+# app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 # API 라우터 등록
 app.include_router(schedule.router, prefix="/api", tags=["schedules"])
@@ -55,3 +55,23 @@ async def calendar(request: Request):
 @app.get("/health")
 async def health_check():
     return {"status": "healthy"}
+
+# 위원회 정보 API 프록시 라우트 추가
+@app.get("/api/committee-data", response_class=HTMLResponse)
+async def committee_data(request: Request):
+    committee = request.query_params.get("committee")
+    if not committee:
+        raise HTTPException(status_code=400, detail="Committee name is required")
+    
+    api_key = os.getenv("OPEN_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=500, detail="API key not found in environment variables")
+    
+    encoded_committee = committee.strip()
+    api_url = f"https://open.assembly.go.kr/portal/openapi/nktulghcadyhmiqxi?KEY={api_key}&Type=xml&DEPT_NM={encoded_committee}"
+
+    async with httpx.AsyncClient() as client:
+        response = await client.get(api_url)
+        if response.status_code != 200:
+            return HTMLResponse(content="외부 API 호출 실패", status_code=500)
+        return HTMLResponse(content=response.text, media_type="application/xml")
