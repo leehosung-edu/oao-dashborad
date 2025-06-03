@@ -1,8 +1,37 @@
 let chartInstance = null;
 
+// API 응답 row 객체에서 BRF_HST 파싱
+function parseSchoolAndCareer(brfHst) {
+  if (!brfHst) return { school: "-", career: "-" };
+
+  // 줄바꿈 및 공백 정리
+  const cleaned = brfHst.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+  // 학력/경력 구분
+  let school = "-";
+  let career = "-";
+
+  // 1. '학력' ~ '주요경력' 또는 '경력' 앞까지 추출
+  const schoolMatch = cleaned.match(/(학력|학교)[^\n]*\n([\s\S]*?)(주요경력|경력|□ 경력|■ 경력|□ 주요경력|■ 주요경력|$)/);
+  if (schoolMatch) {
+    school = schoolMatch[2].trim();
+  }
+
+  // 2. '주요경력' 또는 '경력' 이후 추출
+  const careerMatch = cleaned.match(/(주요경력|경력|□ 경력|■ 경력|□ 주요경력|■ 주요경력)[^\n]*\n([\s\S]*)/);
+  if (careerMatch) {
+    career = careerMatch[2].trim();
+  }
+
+  // 값이 없으면 기본값
+  if (!school) school = "-";
+  if (!career) career = "-";
+  return { school, career };
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   const committeeName = params.get('committee');
+  const memberName = params.get('member');
 
   const titleElement = document.getElementById('committee-title');
   const nameElement = document.getElementById('committee-name');
@@ -11,7 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
   titleElement.textContent = committeeName;
 
   const encodedCommittee = encodeURIComponent(committeeName);
+  const encodedMember = encodeURIComponent(memberName);
   const apiUrl = `/api/committee-data?committee=${encodedCommittee}`;
+  const apiCareerUrl = `/api/committee-career?memberName=${encodedMember}&committee=${encodedCommittee}`;
 
   fetch(apiUrl)
     .then(response => {
@@ -131,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const secretaries = row.getElementsByTagName("SECRETARY")[0]?.textContent || "-";
         const secretariesAssistants = row.getElementsByTagName("SECRETARY2")[0]?.textContent || "-";
         const office = row.getElementsByTagName("ROOM_NO")[0]?.textContent || "-";
-
+        
         // 팝업 열기
         card.addEventListener("click", () => {
           document.getElementById("popup-email").textContent = email;
@@ -144,11 +175,30 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById("popup-secretaries-assistants").textContent = secretariesAssistants;
           document.getElementById("popup-office").textContent = office;
 
+          // 학교 및 경력 정보 카드에 출력
+          fetch(`/api/committee-career?memberName=${encodeURIComponent(name)}&committee=${encodeURIComponent(committeeName)}`)
+            .then(response => {
+              if (!response.ok) throw new Error("API 호출 실패");
+              return response.json();
+            })
+            .then(data => {
+              const row = data.ALLNAMEMBER?.[1]?.row?.[0];
+              let school = "-", career = "-";
+              if (row && row.BRF_HST) {
+                const parsed = parseSchoolAndCareer(row.BRF_HST);
+                school = parsed.school;
+                career = parsed.career;
+              }
+              document.getElementById("popup-school").innerHTML = school.replace(/\n/g, "<br>");
+              document.getElementById("popup-congress").innerHTML = career.replace(/\n/g, "<br>");
+            });
+
+          // 팝업 탭 초기화
           document.querySelectorAll('.popup-tab').forEach(btn => btn.classList.remove('active'));
           document.querySelector('[data-tab="data"]').classList.add('active');
           document.querySelectorAll('.popup-tab-content').forEach(tab => tab.classList.add('hidden'));
           document.getElementById("tab-data").classList.remove("hidden");
-
+          
           document.getElementById("popup-overlay").classList.remove("hidden");
         });
 
@@ -162,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch(err => {
       nameElement.innerHTML = `<p>오류: ${err.message}</p>`;
     });
-
+  
   // 탭 전환
   document.querySelectorAll('.popup-tab').forEach(button => {
     button.addEventListener('click', () => {
