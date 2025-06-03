@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 from pathlib import Path
 from typing import List
-from app.api.endpoints import schedule
+from api.endpoints import schedule
 import os
 import httpx
 
