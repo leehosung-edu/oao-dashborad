@@ -1,19 +1,3 @@
-function click_committe_info(title) {
-    const cachelees_url="/static/html/committe_info.html"+"?nocache"+ new Date().getTime()
-    var newWindow = window.open(cachelees_url,"_blank");
-    
-    newWindow.onload = function() {
-        newWindow.document.title = title;
-    };
-}
-function click_committe_date(title) {
-    const cachelees_url="/static/html/committe_info.html"+"?nocache"+ new Date().getTime()
-    
-    var newWindow = window.open(cachelees_url,"_blank");
-        newWindow.onload = function() {
-        newWindow.document.title = title;
-    };
-}
 
 const parentElement = document.querySelectorAll(".committe_baseset") // 부모 요소 선택
 
@@ -23,8 +7,8 @@ parentElement.forEach(element => {
     const koName = koEl.textContent.replace(/\s+/g, ' ').trim();
     const enName = enEl.textContent.replace(/\s+/g, ' ').trim();
 
-    element.innerHTML += `<span class="button_info" onclick="committee_goto_info('${koName}')"><p>위원회 소개</p></span>`;
-    element.innerHTML += `<span class="button_date" onclick="committee_goto_date('${koName}','${enName}')"><p>일정 보기</p></span>`;
+    element.innerHTML += `<span class="button_info" onclick="committee_goto_info('${koName}')"><p class="button_text">위원회 소개</p></span>`;
+    element.innerHTML += `<span class="button_date" onclick="committee_goto_date('${koName}','${enName}')"><p class="button_text">일정 보기</p></span>`;
 });
 
 function committee_goto_info(koName){
