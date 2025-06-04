@@ -1,31 +1,59 @@
 let chartInstance = null;
 
-// API 응답 row 객체에서 BRF_HST 파싱
+// 학교 및 경력 키워드 정의
+const SCHOOL_KEYWORDS = [
+  "초등학교", "중학교", "고등학교", "대학교", "대학", "대학원",
+  "졸업", "입학", "수료", "박사", "석사", "학사",
+  "교수", "명예교수", "강사", "교사", "연구교수", "조교수", "부교수"
+];
+const CAREER_KEYWORDS = [
+  "국회의원", "위원장", "위원", "간사", "부의장", "의장", "대표", "고문",
+  "사장", "본부장", "실장", "원장", "이사장", "비서관", "행정관", "연구원",
+  "센터장", "회장", "부회장", "대통령", "장관", "시장", "구청장"
+];
+
+// 키워드 탐지 함수
+function containsKeyword(line, keywords) {
+  return keywords.some(kw => line.includes(kw));
+}
+
+// BRF_HST 필드 학교-민간/국회 경력 정보 파싱
 function parseSchoolAndCareer(brfHst) {
-  if (!brfHst) return { school: "-", career: "-" };
+  if (!brfHst) return { school: "학교 관련 경력이 없습니다.", career: "민간 및 국회 관련 경력이 없습니다." };
 
   // 줄바꿈 및 공백 정리
-  const cleaned = brfHst.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-  // 학력/경력 구분
-  let school = "-";
-  let career = "-";
+  const lines = brfHst.replace(/\r\n|\r/g, "\n").split("\n").map(l => l.trim()).filter(Boolean);
 
-  // 1. '학력' ~ '주요경력' 또는 '경력' 앞까지 추출
-  const schoolMatch = cleaned.match(/(학력|학교)[^\n]*\n([\s\S]*?)(주요경력|경력|□ 경력|■ 경력|□ 주요경력|■ 주요경력|$)/);
-  if (schoolMatch) {
-    school = schoolMatch[2].trim();
+  const schoolArr = [];
+  const careerArr = [];
+
+  for (let line of lines) {
+    // 구분 헤더 무시
+    if (/^\s*(\[?학력\]?|□\s*학력|■\s*학력|<학력>|-+\s*학력|^\s*학력\s*$)/.test(line)) continue;
+    if (/^\s*(\[?경력\]?|□\s*경력|■\s*경력|<경력>|-+\s*경력|^\s*경력\s*$|주요경력|약력|주요 약력)/.test(line)) continue;
+    if (!line.replace(/[-–—•·\s]/g, "")) continue; // 구분선 등
+
+    const isSchool = containsKeyword(line, SCHOOL_KEYWORDS);
+    const isCareer = containsKeyword(line, CAREER_KEYWORDS);
+
+    // 학교 관련 키워드가 있으면 우선 학교로 분류
+    if (isSchool && !isCareer) {
+      schoolArr.push(line);
+    } else if (isCareer) {
+      careerArr.push(line);
+    } else if (isSchool) {
+      // 학교 키워드가 있으면 학교에 우선
+      schoolArr.push(line);
+    } else {
+      // 키워드 없으면 일단 경력에 포함
+      careerArr.push(line);
+    }
   }
 
-  // 2. '주요경력' 또는 '경력' 이후 추출
-  const careerMatch = cleaned.match(/(주요경력|경력|□ 경력|■ 경력|□ 주요경력|■ 주요경력)[^\n]*\n([\s\S]*)/);
-  if (careerMatch) {
-    career = careerMatch[2].trim();
-  }
-
-  // 값이 없으면 기본값
-  if (!school) school = "-";
-  if (!career) career = "-";
-  return { school, career };
+  return {
+    school: schoolArr.length ? schoolArr.join("\n") : "학교 관련 경력이 없습니다.",
+    career: careerArr.length ? careerArr.join("\n") : "민간 및 국회 관련 경력이 없습니다."
+  };
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -183,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(data => {
               const row = data.ALLNAMEMBER?.[1]?.row?.[0];
-              let school = "-", career = "-";
+              let school, career;
               if (row && row.BRF_HST) {
                 const parsed = parseSchoolAndCareer(row.BRF_HST);
                 school = parsed.school;
