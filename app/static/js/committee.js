@@ -184,8 +184,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const email = row.getElementsByTagName("ASSEM_EMAIL")[0]?.textContent || "-";
         const phone = row.getElementsByTagName("ASSEM_TEL")[0]?.textContent || "-";
-     // const gender = row.getElementsByTagName("NAAS_NM")[0]?.textContent || "-";
-     // const birth = row.getElementsByTagName("BIRTH_DT")[0]?.textContent || "-";
+        const gender = row.getElementsByTagName("NTR_DIV")[0]?.textContent || "-";
+        const birth = row.getElementsByTagName("BIRDY_DT")[0]?.textContent || "-";
         const aides = row.getElementsByTagName("STAFF")[0]?.textContent || "-";
         const secretaries = row.getElementsByTagName("SECRETARY")[0]?.textContent || "-";
         const secretariesAssistants = row.getElementsByTagName("SECRETARY2")[0]?.textContent || "-";
@@ -196,8 +196,8 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById("popup-email").textContent = email;
           document.getElementById("popup-phone").textContent = phone;
           document.getElementById("popup-name").textContent = name;
-       // document.getElementById("popup-gender").textContent = gender;
-       // document.getElementById("popup-birth").textContent = birth;
+          document.getElementById("popup-gender").textContent = gender;
+          document.getElementById("popup-birth").textContent = birth;
           document.getElementById("popup-aides").textContent = aides;
           document.getElementById("popup-secretaries").textContent = secretaries;
           document.getElementById("popup-secretaries-assistants").textContent = secretariesAssistants;
@@ -211,7 +211,9 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(data => {
               const row = data.ALLNAMEMBER?.[1]?.row?.[0];
-              let school, career;
+              let school = "학교 관련 경력이 없습니다.";
+              let career = "민간 및 국회 관련 경력이 없습니다.";
+
               if (row && row.BRF_HST) {
                 const parsed = parseSchoolAndCareer(row.BRF_HST);
                 school = parsed.school;
@@ -219,6 +221,11 @@ document.addEventListener('DOMContentLoaded', () => {
               }
               document.getElementById("popup-school").innerHTML = school.replace(/\n/g, "<br>");
               document.getElementById("popup-congress").innerHTML = career.replace(/\n/g, "<br>");
+
+              const gender = row?.NTR_DIV || "-";
+              const birth = row?.BIRDY_DT || "-";
+              document.getElementById("popup-gender").textContent = gender;
+              document.getElementById("popup-birth").textContent = birth;
             });
 
           // 팝업 탭 초기화
