@@ -184,8 +184,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const email = row.getElementsByTagName("ASSEM_EMAIL")[0]?.textContent || "-";
         const phone = row.getElementsByTagName("ASSEM_TEL")[0]?.textContent || "-";
-        const gender = row.getElementsByTagName("NAAS_NM")[0]?.textContent || "-";
-        const birth = row.getElementsByTagName("BIRTH_DT")[0]?.textContent || "-";
+     // const gender = row.getElementsByTagName("NAAS_NM")[0]?.textContent || "-";
+     // const birth = row.getElementsByTagName("BIRTH_DT")[0]?.textContent || "-";
         const aides = row.getElementsByTagName("STAFF")[0]?.textContent || "-";
         const secretaries = row.getElementsByTagName("SECRETARY")[0]?.textContent || "-";
         const secretariesAssistants = row.getElementsByTagName("SECRETARY2")[0]?.textContent || "-";
