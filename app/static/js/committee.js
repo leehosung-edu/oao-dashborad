@@ -196,6 +196,8 @@ document.addEventListener('DOMContentLoaded', () => {
           document.getElementById("popup-email").textContent = email;
           document.getElementById("popup-phone").textContent = phone;
           document.getElementById("popup-name").textContent = name;
+          document.getElementById("popup-gender").textContent = gender;
+          document.getElementById("popup-birth").textContent = birth;
           document.getElementById("popup-aides").textContent = aides;
           document.getElementById("popup-secretaries").textContent = secretaries;
           document.getElementById("popup-secretaries-assistants").textContent = secretariesAssistants;
@@ -219,6 +221,11 @@ document.addEventListener('DOMContentLoaded', () => {
               }
               document.getElementById("popup-school").innerHTML = school.replace(/\n/g, "<br>");
               document.getElementById("popup-congress").innerHTML = career.replace(/\n/g, "<br>");
+
+              const gender = row?.NTR_DIV || "-";
+              const birth = row?.BIRDY_DT || "-";
+              document.getElementById("popup-gender").textContent = gender;
+              document.getElementById("popup-birth").textContent = birth;
             });
 
           // 팝업 탭 초기화
