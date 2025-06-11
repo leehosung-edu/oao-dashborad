@@ -18,3 +18,4 @@ function committee_goto_info(koName){
 function committee_goto_date(koName, enName){
     window.location.href = `/calendar?committee=${encodeURIComponent(koName)}&committee_en=${encodeURIComponent(enName)}&use_name=true`;
 }
+console.log("현재 메인 페이지 외에도 위원회 통합 켈린더 네비게이터를 통해 추가 켈린더를 볼 수 있습니다, 두 켈린더의 차이는 없습니다. 둘 중 무슨 기능이 쓸모없을까요?")

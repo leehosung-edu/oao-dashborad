@@ -25,6 +25,24 @@ main {
     align-items: center;
     /* overflow: hidden; */
 }
+nav{
+  text-align: center;
+  background-color: #444 !important;
+  border-bottom:1px solid  black;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  user-select: none;
+}
+
+nav a{
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  border: 10px;
+  font-weight: 350;
+}
 .img_container{
     width: 100%;
     box-sizing: border-box;
