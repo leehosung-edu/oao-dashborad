@@ -22,6 +22,24 @@ html, body {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+/* 네비게이터 */
+nav{
+  text-align: center;
+  background-color: #555 !important;
+  border-bottom:1px solid  black;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  user-select: none;
+}
+
+nav a{
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+}
+
 /* 달력, 일정, 안건 */
 .calendar-container {
   display: flex;
