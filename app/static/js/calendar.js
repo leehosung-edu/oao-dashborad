@@ -6,9 +6,13 @@ const useName = params.get("use_name") === "true";
 window.addEventListener('DOMContentLoaded', () => {
   if (committeeKo) {
     document.getElementById('committeeKo').textContent = committeeKo;
+  }else{
+    document.getElementById('committeeKo').textContent = "모든 위원회 일정";
   }
   if (committeeEn) {
     document.getElementById('committeeEn').textContent = committeeEn;
+  }else{
+    document.getElementById('committeeEn').textContent="all committee schedule"
   }
 });
 
